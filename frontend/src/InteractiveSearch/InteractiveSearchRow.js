@@ -180,7 +180,7 @@ class InteractiveSearchRow extends Component {
                     }
                   </ul>
                 }
-                position={tooltipPositions.LEFT}
+                position={tooltipPositions.BOTTOM}
               />
           }
         </TableRowCell>
@@ -189,7 +189,6 @@ class InteractiveSearchRow extends Component {
           <Link
             to={infoUrl}
             title={title}
-            rel='noreferrer'
           >
             <div>
               {title}
@@ -293,7 +292,7 @@ class InteractiveSearchRow extends Component {
                     }
                   </ul>
                 }
-                position={tooltipPositions.LEFT}
+                position={tooltipPositions.BOTTOM}
               />
           }
         </TableRowCell>
