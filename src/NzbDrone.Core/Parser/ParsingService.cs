@@ -142,9 +142,14 @@ namespace NzbDrone.Core.Parser
             if (parsedMovieInfo.Languages.Contains(Language.Original))
             {
                 parsedMovieInfo.Languages.Remove(Language.Original);
-                if (!parsedMovieInfo.Languages.Contains(result.Movie.OriginalLanguage))
+
+                if (result.Movie != null && !parsedMovieInfo.Languages.Contains(result.Movie.OriginalLanguage))
                 {
                     parsedMovieInfo.Languages.Add(result.Movie.OriginalLanguage);
+                }
+                else
+                {
+                    parsedMovieInfo.Languages.Add(Language.Unknown);
                 }
             }
 
