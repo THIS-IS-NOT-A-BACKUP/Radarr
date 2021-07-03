@@ -44,11 +44,7 @@ namespace NzbDrone.Common.Processes
 
         public static int GetCurrentProcessId()
         {
-#if NETCOREAPP
             return Environment.ProcessId;
-#else
-            return Process.GetCurrentProcess().Id;
-#endif
         }
 
         public ProcessInfo GetCurrentProcess()
@@ -340,16 +336,7 @@ namespace NzbDrone.Common.Processes
 
         private List<Process> GetProcessesByName(string name)
         {
-            //TODO: move this to an OS specific class
-            var monoProcesses = Process.GetProcessesByName("mono")
-                                       .Union(Process.GetProcessesByName("mono-sgen"))
-                                       .Where(process =>
-                                              process.Modules.Cast<ProcessModule>()
-                                                     .Any(module =>
-                                                          module.ModuleName.ToLower() == name.ToLower() + ".exe"));
-
-            var processes = Process.GetProcessesByName(name)
-                                   .Union(monoProcesses).ToList();
+            var processes = Process.GetProcessesByName(name).ToList();
 
             _logger.Debug("Found {0} processes with the name: {1}", processes.Count, name);
 
@@ -370,11 +357,6 @@ namespace NzbDrone.Common.Processes
 
         private (string Path, string Args) GetPathAndArgs(string path, string args)
         {
-            if (PlatformInfo.IsMono && path.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
-            {
-                return ("mono", $"--debug {path} {args}");
-            }
-
             if (OsInfo.IsWindows && path.EndsWith(".bat", StringComparison.InvariantCultureIgnoreCase))
             {
                 return ("cmd.exe", $"/c {path} {args}");

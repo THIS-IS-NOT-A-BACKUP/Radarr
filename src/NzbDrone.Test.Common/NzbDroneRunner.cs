@@ -44,10 +44,6 @@ namespace NzbDrone.Test.Common
             {
                 consoleExe = "Radarr.Console.exe";
             }
-            else if (PlatformInfo.IsMono)
-            {
-                consoleExe = "Radarr.exe";
-            }
             else
             {
                 consoleExe = "Radarr";
@@ -55,8 +51,7 @@ namespace NzbDrone.Test.Common
 
             if (BuildInfo.IsDebug)
             {
-                var frameworkFolder = PlatformInfo.IsNetCore ? "net5.0" : "net472";
-                Start(Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "_output", frameworkFolder, consoleExe));
+                Start(Path.Combine(TestContext.CurrentContext.TestDirectory, "..", "..", "_output", "net5.0", consoleExe));
             }
             else
             {
