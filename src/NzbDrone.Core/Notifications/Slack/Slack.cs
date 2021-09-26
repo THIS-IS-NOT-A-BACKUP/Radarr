@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using FluentValidation.Results;
 using NzbDrone.Common.Extensions;
+using NzbDrone.Core.MediaFiles;
 using NzbDrone.Core.Movies;
 using NzbDrone.Core.Notifications.Slack.Payloads;
 using NzbDrone.Core.Validation;
@@ -56,15 +57,18 @@ namespace NzbDrone.Core.Notifications.Slack
             _proxy.SendPayload(payload, Settings);
         }
 
-        public override void OnMovieRename(Movie movie)
+        public override void OnMovieRename(Movie movie, List<RenamedMovieFile> renamedFiles)
         {
-            var attachments = new List<Attachment>
-                                {
-                                    new Attachment
-                                    {
-                                        Title = movie.Title,
-                                    }
-                                };
+            var attachments = new List<Attachment>();
+
+            foreach (RenamedMovieFile renamedFile in renamedFiles)
+            {
+                attachments.Add(new Attachment
+                {
+                    Title = movie.Title,
+                    Text = renamedFile.PreviousRelativePath + " renamed to " + renamedFile.MovieFile.RelativePath,
+                });
+            }
 
             var payload = CreatePayload("Renamed", attachments);
 
