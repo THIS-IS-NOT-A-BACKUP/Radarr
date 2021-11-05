@@ -67,7 +67,8 @@ class RemoveQueueItemsModal extends Component {
     const {
       isOpen,
       selectedCount,
-      canIgnore
+      canIgnore,
+      allPending
     } = this.props;
 
     const { remove, blocklist } = this.state;
@@ -82,30 +83,34 @@ class RemoveQueueItemsModal extends Component {
           onModalClose={this.onModalClose}
         >
           <ModalHeader>
-            Remove Selected Item{selectedCount > 1 ? 's' : ''}
+            {selectedCount > 1 ? translate('RemoveSelectedItems') : translate('RemoveSelectedItem')}
           </ModalHeader>
 
           <ModalBody>
             <div className={styles.message}>
-              {translate('AreYouSureYouWantToRemoveSelectedItemsFromQueue', [selectedCount, selectedCount > 1 ? 's' : ''])}
+              {selectedCount > 1 ? translate('AreYouSureYouWantToRemoveSelectedItemsFromQueue', selectedCount) : translate('AreYouSureYouWantToRemoveSelectedItemFromQueue')}
             </div>
 
-            <FormGroup>
-              <FormLabel>{translate('RemoveFromDownloadClient')}</FormLabel>
+            {
+              allPending ?
+                null :
+                <FormGroup>
+                  <FormLabel>{translate('RemoveFromDownloadClient')}</FormLabel>
 
-              <FormInputGroup
-                type={inputTypes.CHECK}
-                name="remove"
-                value={remove}
-                helpTextWarning={translate('RemoveHelpTextWarning')}
-                isDisabled={!canIgnore}
-                onChange={this.onRemoveChange}
-              />
-            </FormGroup>
+                  <FormInputGroup
+                    type={inputTypes.CHECK}
+                    name="remove"
+                    value={remove}
+                    helpTextWarning={translate('RemoveHelpTextWarning')}
+                    isDisabled={!canIgnore}
+                    onChange={this.onRemoveChange}
+                  />
+                </FormGroup>
+            }
 
             <FormGroup>
               <FormLabel>
-                Blocklist Release{selectedCount > 1 ? 's' : ''}
+                {selectedCount > 1 ? translate('BlocklistReleases') : translate('BlocklistRelease')}
               </FormLabel>
 
               <FormInputGroup
@@ -141,6 +146,7 @@ RemoveQueueItemsModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   selectedCount: PropTypes.number.isRequired,
   canIgnore: PropTypes.bool.isRequired,
+  allPending: PropTypes.bool.isRequired,
   onRemovePress: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
