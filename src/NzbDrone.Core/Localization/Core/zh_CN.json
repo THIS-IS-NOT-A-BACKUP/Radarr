@@ -1106,5 +1106,6 @@
     "UpdateAvailable": "有新的更新可用",
     "Letterboxd": "信箱",
     "RemoveSelectedItem": "删除所选项目",
-    "RemoveSelectedItems": "删除所选项目"
+    "RemoveSelectedItems": "删除所选项目",
+    "TaskUserAgentTooltip": "User-Agent provided by the app that called the API"
 }
