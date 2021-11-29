@@ -20,6 +20,7 @@ namespace NzbDrone.Core.MediaFiles
         List<string> FilterExistingFiles(List<string> files, Movie movie);
         MovieFile GetMovie(int id);
         List<MovieFile> GetMovies(IEnumerable<int> ids);
+        List<MovieFile> GetFilesWithRelativePath(int movieIds, string relativePath);
     }
 
     public class MediaFileService : IMediaFileService, IHandleAsync<MoviesDeletedEvent>
@@ -106,9 +107,26 @@ namespace NzbDrone.Core.MediaFiles
             return _mediaFileRepository.Get(id);
         }
 
+        public List<MovieFile> GetFilesWithRelativePath(int movieId, string relativePath)
+        {
+            return _mediaFileRepository.GetFilesWithRelativePath(movieId, relativePath);
+        }
+
         public void HandleAsync(MoviesDeletedEvent message)
         {
             _mediaFileRepository.DeleteForMovies(message.Movies.Select(m => m.Id).ToList());
+        }
+
+        public static List<string> FilterExistingFiles(List<string> files, List<MovieFile> movieFiles, Movie movie)
+        {
+            var seriesFilePaths = movieFiles.Select(f => Path.Combine(movie.Path, f.RelativePath)).ToList();
+
+            if (!seriesFilePaths.Any())
+            {
+                return files;
+            }
+
+            return files.Except(seriesFilePaths, PathEqualityComparer.Instance).ToList();
         }
     }
 }
