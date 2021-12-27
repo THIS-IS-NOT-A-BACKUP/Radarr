@@ -45,7 +45,9 @@ function EditIndexerModalContent(props) {
     supportsSearch,
     tags,
     fields,
-    priority
+    priority,
+    protocol,
+    downloadClientId
   } = item;
 
   return (
@@ -154,8 +156,25 @@ function EditIndexerModalContent(props) {
                 />
               </FormGroup>
 
+              <FormGroup
+                advancedSettings={advancedSettings}
+                isAdvanced={true}
+              >
+                <FormLabel>{translate('DownloadClient')}</FormLabel>
+
+                <FormInputGroup
+                  type={inputTypes.DOWNLOAD_CLIENT_SELECT}
+                  name="downloadClientId"
+                  helpText={translate('IndexerDownloadClientHelpText')}
+                  {...downloadClientId}
+                  includeAny={true}
+                  protocol={protocol.value}
+                  onChange={onInputChange}
+                />
+              </FormGroup>
+
               <FormGroup>
-                <FormLabel>Tags</FormLabel>
+                <FormLabel>{translate('Tags')}</FormLabel>
 
                 <FormInputGroup
                   type={inputTypes.TAG}
