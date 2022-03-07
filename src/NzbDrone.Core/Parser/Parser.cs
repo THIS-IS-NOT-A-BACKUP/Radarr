@@ -122,8 +122,10 @@ namespace NzbDrone.Core.Parser
         private static readonly Regex CleanQualityBracketsRegex = new Regex(@"\[[a-z0-9 ._-]+\]$",
                                                                    RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private static readonly Regex ReleaseGroupRegex = new Regex(@"-(?<releasegroup>[a-z0-9]+(?<part2>-[a-z0-9]+)?(?!.+?(?:480p|720p|1080p|2160p)))(?<!(?:WEB-DL|Blu-Ray|480p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|[ ._]\d{4}-\d{2}|-\d{2}|tmdb(id)?-(?<tmdbid>\d+)|(?<imdbid>tt\d{7,8}))(?:\k<part2>)?)(?:\b|[-._ ]|$)|[-._ ]\[(?<releasegroup>[a-z0-9]+)\]$",
+        private static readonly Regex ReleaseGroupRegex = new Regex(@"-(?<releasegroup>[a-z0-9]+(?<part2>-[a-z0-9]+)?(?!.+?(?:480p|720p|1080p|2160p)))(?<!(?:WEB-DL|Blu-Ray|480p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|-ES|-EN|-CAT|-HDRip|[ ._]\d{4}-\d{2}|-\d{2}|tmdb(id)?-(?<tmdbid>\d+)|(?<imdbid>tt\d{7,8}))(?:\k<part2>)?)(?:\b|[-._ ]|$)|[-._ ]\[(?<releasegroup>[a-z0-9]+)\]$",
                                                                 RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        private static readonly Regex InvalidReleaseGroupRegex = new Regex(@"^([se]\d+|[0-9a-f]{8})$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static readonly Regex AnimeReleaseGroupRegex = new Regex(@"^(?:\[(?<subgroup>(?!\s).+?(?<!\s))\](?:_|-|\s|\.)?)",
                                                                 RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -132,9 +134,12 @@ namespace NzbDrone.Core.Parser
                                                                 RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         //Handle Exception Release Groups that don't follow -RlsGrp; Manual List
-        //First Group is groups whose releases end with RlsGroup) or RlsGroup]  second group (entries after `(?=\]|\))|`) is name only...BE VERY CAREFUL WITH THIS, HIGH CHANCE OF FALSE POSITIVES
-        private static readonly Regex ExceptionReleaseGroupRegex = new Regex(@"(?<releasegroup>(Tigole|Joy|YIFY|YTS.MX|YTS.LT|FreetheFish|afm72|Anna|Bandi|Ghost|Kappa|MONOLITH|Qman|RZeroX|SAMPA|Silence|theincognito|t3nzin|Vyndros)(?=\]|\))|KRaLiMaRKo|E\.N\.D|D\-Z0N3)",
-                                                        RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        //groups whose releases end with RlsGroup) or RlsGroup]
+        private static readonly Regex ExceptionReleaseGroupRegex = new Regex(@"(?<releasegroup>(Tigole|Joy|YIFY|YTS.MX|YTS.LT|FreetheFish|afm72|Anna|Bandi|Ghost|Kappa|MONOLITH|Qman|RZeroX|SAMPA|Silence|theincognito|t3nzin|Vyndros|HDO|DusIctv|DHD|SEV|CtrlHD|-ZR-|ADC|XZVN|RH|Kametsu)(?=\]|\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+       //Handle Exception Release Groups that don't follow -RlsGrp; Manual List
+       // name only...BE VERY CAREFUL WITH THIS, HIGH CHANCE OF FALSE POSITIVES
+        private static readonly Regex ExceptionReleaseGroupRegexExact = new Regex(@"(?<releasegroup>KRaLiMaRKo|E\.N\.D|D\-Z0N3|Koten_Gars|BluDragon)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static readonly Regex WordDelimiterRegex = new Regex(@"(\s|\.|,|_|-|=|'|\|)+", RegexOptions.Compiled);
         private static readonly Regex SpecialCharRegex = new Regex(@"(\&|\:|\\|\/)+", RegexOptions.Compiled);
@@ -462,11 +467,18 @@ namespace NzbDrone.Core.Parser
 
             title = CleanReleaseGroupRegex.Replace(title);
 
-            var exceptionMatch = ExceptionReleaseGroupRegex.Matches(title);
+            var exceptionReleaseGroupRegex = ExceptionReleaseGroupRegex.Matches(title);
 
-            if (exceptionMatch.Count != 0)
+            if (exceptionReleaseGroupRegex.Count != 0)
             {
-                return exceptionMatch.OfType<Match>().Last().Groups["releasegroup"].Value;
+                return exceptionReleaseGroupRegex.OfType<Match>().Last().Groups["releasegroup"].Value;
+            }
+
+            var exceptionExactMatch = ExceptionReleaseGroupRegexExact.Matches(title);
+
+            if (exceptionExactMatch.Count != 0)
+            {
+                return exceptionExactMatch.OfType<Match>().Last().Groups["releasegroup"].Value;
             }
 
             var matches = ReleaseGroupRegex.Matches(title);
@@ -477,6 +489,11 @@ namespace NzbDrone.Core.Parser
                 int groupIsNumeric;
 
                 if (int.TryParse(group, out groupIsNumeric))
+                {
+                    return null;
+                }
+
+                if (InvalidReleaseGroupRegex.IsMatch(group))
                 {
                     return null;
                 }
