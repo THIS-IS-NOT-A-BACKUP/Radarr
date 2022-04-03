@@ -11,9 +11,9 @@ using NzbDrone.Core.Test.Framework;
 namespace NzbDrone.Core.Test.Datastore
 {
     [TestFixture]
-    public class WhereBuilderFixture : CoreTest
+    public class WhereBuilderPostgresFixture : CoreTest
     {
-        private WhereBuilder _subject;
+        private WhereBuilderPostgres _subject;
 
         [OneTimeSetUp]
         public void MapTables()
@@ -22,13 +22,13 @@ namespace NzbDrone.Core.Test.Datastore
             Mocker.Resolve<DbFactory>();
         }
 
-        private WhereBuilder Where(Expression<Func<Movie, bool>> filter)
+        private WhereBuilderPostgres Where(Expression<Func<Movie, bool>> filter)
         {
-            return new WhereBuilder(filter, true, 0);
+            return new WhereBuilderPostgres(filter, true, 0);
         }
 
         [Test]
-        public void where_equal_const()
+        public void postgres_where_equal_const()
         {
             _subject = Where(x => x.Id == 10);
 
@@ -37,7 +37,7 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_equal_variable()
+        public void postgres_where_equal_variable()
         {
             var id = 10;
             _subject = Where(x => x.Id == id);
@@ -47,7 +47,7 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_equal_property()
+        public void postgres_where_equal_property()
         {
             var movie = new Movie { Id = 10 };
             _subject = Where(x => x.Id == movie.Id);
@@ -58,7 +58,7 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_equal_joined_property()
+        public void postgres_where_equal_joined_property()
         {
             _subject = Where(x => x.Profile.Id == 1);
 
@@ -68,23 +68,23 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_throws_without_concrete_condition_if_requiresConcreteCondition()
+        public void postgres_where_throws_without_concrete_condition_if_requiresConcreteCondition()
         {
             Expression<Func<Movie, Movie, bool>> filter = (x, y) => x.Id == y.Id;
-            _subject = new WhereBuilder(filter, true, 0);
+            _subject = new WhereBuilderPostgres(filter, true, 0);
             Assert.Throws<InvalidOperationException>(() => _subject.ToString());
         }
 
         [Test]
-        public void where_allows_abstract_condition_if_not_requiresConcreteCondition()
+        public void postgres_where_allows_abstract_condition_if_not_requiresConcreteCondition()
         {
             Expression<Func<Movie, Movie, bool>> filter = (x, y) => x.Id == y.Id;
-            _subject = new WhereBuilder(filter, false, 0);
+            _subject = new WhereBuilderPostgres(filter, false, 0);
             _subject.ToString().Should().Be($"(\"Movies\".\"Id\" = \"Movies\".\"Id\")");
         }
 
         [Test]
-        public void where_string_is_null()
+        public void postgres_where_string_is_null()
         {
             _subject = Where(x => x.CleanTitle == null);
 
@@ -92,7 +92,7 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_string_is_null_value()
+        public void postgres_where_string_is_null_value()
         {
             string cleanTitle = null;
             _subject = Where(x => x.CleanTitle == cleanTitle);
@@ -101,7 +101,7 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_equal_null_property()
+        public void postgres_where_equal_null_property()
         {
             var movie = new Movie { CleanTitle = null };
             _subject = Where(x => x.CleanTitle == movie.CleanTitle);
@@ -110,73 +110,71 @@ namespace NzbDrone.Core.Test.Datastore
         }
 
         [Test]
-        public void where_column_contains_string()
+        public void postgres_where_column_contains_string()
         {
             var test = "small";
             _subject = Where(x => x.CleanTitle.Contains(test));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" LIKE '%' || @Clause1_P1 || '%')");
+            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" ILIKE '%' || @Clause1_P1 || '%')");
             _subject.Parameters.Get<string>("Clause1_P1").Should().Be(test);
         }
 
         [Test]
-        public void where_string_contains_column()
+        public void postgres_where_string_contains_column()
         {
             var test = "small";
             _subject = Where(x => test.Contains(x.CleanTitle));
 
-            _subject.ToString().Should().Be($"(@Clause1_P1 LIKE '%' || \"Movies\".\"CleanTitle\" || '%')");
+            _subject.ToString().Should().Be($"(@Clause1_P1 ILIKE '%' || \"Movies\".\"CleanTitle\" || '%')");
             _subject.Parameters.Get<string>("Clause1_P1").Should().Be(test);
         }
 
         [Test]
-        public void where_column_starts_with_string()
+        public void postgres_where_column_starts_with_string()
         {
             var test = "small";
             _subject = Where(x => x.CleanTitle.StartsWith(test));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" LIKE @Clause1_P1 || '%')");
+            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" ILIKE @Clause1_P1 || '%')");
             _subject.Parameters.Get<string>("Clause1_P1").Should().Be(test);
         }
 
         [Test]
-        public void where_column_ends_with_string()
+        public void postgres_where_column_ends_with_string()
         {
             var test = "small";
             _subject = Where(x => x.CleanTitle.EndsWith(test));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" LIKE '%' || @Clause1_P1)");
+            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" ILIKE '%' || @Clause1_P1)");
             _subject.Parameters.Get<string>("Clause1_P1").Should().Be(test);
         }
 
         [Test]
-        public void where_in_list()
+        public void postgres_where_in_list()
         {
             var list = new List<int> { 1, 2, 3 };
             _subject = Where(x => list.Contains(x.Id));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"Id\" IN (1, 2, 3))");
-
-            _subject.Parameters.ParameterNames.Should().BeEmpty();
+            _subject.ToString().Should().Be($"(\"Movies\".\"Id\" = ANY (('{{1, 2, 3}}')))");
         }
 
         [Test]
-        public void where_in_list_2()
+        public void postgres_where_in_list_2()
         {
             var list = new List<int> { 1, 2, 3 };
             _subject = Where(x => x.CleanTitle == "test" && list.Contains(x.Id));
 
-            _subject.ToString().Should().Be($"((\"Movies\".\"CleanTitle\" = @Clause1_P1) AND (\"Movies\".\"Id\" IN (1, 2, 3)))");
+            _subject.ToString().Should().Be($"((\"Movies\".\"CleanTitle\" = @Clause1_P1) AND (\"Movies\".\"Id\" = ANY (('{{1, 2, 3}}'))))");
         }
 
         [Test]
-        public void where_in_string_list()
+        public void postgres_where_in_string_list()
         {
             var list = new List<string> { "first", "second", "third" };
 
             _subject = Where(x => list.Contains(x.CleanTitle));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" IN @Clause1_P1)");
+            _subject.ToString().Should().Be($"(\"Movies\".\"CleanTitle\" = ANY (@Clause1_P1))");
         }
 
         [Test]
@@ -193,7 +191,7 @@ namespace NzbDrone.Core.Test.Datastore
             var allowed = new List<MovieStatusType> { MovieStatusType.Announced, MovieStatusType.InCinemas };
             _subject = Where(x => allowed.Contains(x.Status));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"Status\" IN @Clause1_P1)");
+            _subject.ToString().Should().Be($"(\"Movies\".\"Status\" = ANY (@Clause1_P1))");
         }
 
         [Test]
@@ -202,7 +200,7 @@ namespace NzbDrone.Core.Test.Datastore
             var allowed = new MovieStatusType[] { MovieStatusType.Announced, MovieStatusType.InCinemas };
             _subject = Where(x => allowed.Contains(x.Status));
 
-            _subject.ToString().Should().Be($"(\"Movies\".\"Status\" IN @Clause1_P1)");
+            _subject.ToString().Should().Be($"(\"Movies\".\"Status\" = ANY (@Clause1_P1))");
         }
     }
 }
