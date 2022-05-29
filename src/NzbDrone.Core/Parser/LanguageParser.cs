@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using NLog;
-using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Instrumentation;
 using NzbDrone.Core.Languages;
 
@@ -151,6 +150,11 @@ namespace NzbDrone.Core.Parser
             if (lowerTitle.Contains("portuguese"))
             {
                 languages.Add(Language.Portuguese);
+            }
+
+            if (lowerTitle.Contains("brazilian"))
+            {
+                languages.Add(Language.PortugueseBR);
             }
 
             if (lowerTitle.Contains("hungarian"))
