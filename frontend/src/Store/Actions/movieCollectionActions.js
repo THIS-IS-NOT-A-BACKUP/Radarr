@@ -254,27 +254,32 @@ export const actionHandlers = handleThunks({
     const {
       collectionIds,
       monitored,
-      monitor
+      monitor,
+      qualityProfileId,
+      rootFolderPath,
+      minimumAvailability
     } = payload;
 
     const response = {};
-    const collections = [];
 
-    collectionIds.forEach((id) => {
-      const collectionToUpdate = { id };
-
-      if (payload.hasOwnProperty('monitored')) {
-        collectionToUpdate.monitored = monitored;
-      }
-
-      collections.push(collectionToUpdate);
-    });
+    if (payload.hasOwnProperty('monitored')) {
+      response.monitored = monitored;
+    }
 
     if (payload.hasOwnProperty('monitor')) {
       response.monitorMovies = monitor === 'monitored';
     }
 
-    response.collections = collections;
+    if (payload.hasOwnProperty('qualityProfileId')) {
+      response.qualityProfileId = qualityProfileId;
+    }
+
+    if (payload.hasOwnProperty('minimumAvailability')) {
+      response.minimumAvailability = minimumAvailability;
+    }
+
+    response.rootFolderPath = rootFolderPath;
+    response.collectionIds = collectionIds;
 
     dispatch(set({
       section,
