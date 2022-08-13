@@ -15,7 +15,7 @@ variables:
   buildName: '$(Build.SourceBranchName).$(radarrVersion)'
   sentryOrg: 'servarr'
   sentryUrl: 'https://sentry.servarr.com'
-  dotnetVersion: '6.0.300'
+  dotnetVersion: '6.0.400'
   nodeVersion: '16.X'
   innoVersion: '6.2.0'
   windowsImage: 'windows-2022'
@@ -549,7 +549,7 @@ stages:
         Radarr__Postgres__Password: 'radarr'
 
       pool:
-        vmImage: 'ubuntu-18.04'
+        vmImage: ${{ variables.linuxImage }}
 
       timeoutInMinutes: 10
         
@@ -687,7 +687,7 @@ stages:
         Radarr__Postgres__Password: 'radarr'
 
       pool:
-        vmImage: 'ubuntu-18.04'
+        vmImage: ${{ variables.linuxImage }}
 
       steps:
         - task: UseDotNet@2
