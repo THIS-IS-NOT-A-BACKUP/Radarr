@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using NLog;
+using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Instrumentation;
 using NzbDrone.Core.Languages;
 
@@ -36,7 +37,7 @@ namespace NzbDrone.Core.Parser
                                                                                                           (?<slovak>\bSK\b)",
                                                                 RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace);
 
-        private static readonly Regex SubtitleLanguageRegex = new Regex(".+?[-_. ](?<iso_code>[a-z]{2,3})(?:[-_. ]forced)?$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex SubtitleLanguageRegex = new Regex(".+?[-_. ](?<iso_code>[a-z]{2,3})([-_. ](?<tags>full|forced|foreign|default|cc|psdh|sdh))*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public static List<Language> ParseLanguages(string title)
         {
@@ -304,6 +305,25 @@ namespace NzbDrone.Core.Parser
             return languages.DistinctBy(l => (int)l).ToList();
         }
 
+        public static IEnumerable<string> ParseLanguageTags(string fileName)
+        {
+            try
+            {
+                var simpleFilename = Path.GetFileNameWithoutExtension(fileName);
+                var match = SubtitleLanguageRegex.Match(simpleFilename);
+                var languageTags = match.Groups["tags"].Captures.Cast<Capture>()
+                    .Where(tag => !tag.Value.Empty())
+                    .Select(tag => tag.Value.ToLower());
+                return languageTags;
+            }
+            catch (Exception ex)
+            {
+                Logger.Debug(ex, "Failed parsing language tags from subtitle file: {0}", fileName);
+            }
+
+            return Enumerable.Empty<string>();
+        }
+
         public static Language ParseSubtitleLanguage(string fileName)
         {
             try
@@ -316,9 +336,17 @@ namespace NzbDrone.Core.Parser
                 if (languageMatch.Success)
                 {
                     var isoCode = languageMatch.Groups["iso_code"].Value;
-                    var isoLanguage = IsoLanguages.Find(isoCode);
+                    var isoLanguage = IsoLanguages.Find(isoCode.ToLower());
 
                     return isoLanguage?.Language ?? Language.Unknown;
+                }
+
+                foreach (Language language in Language.All)
+                {
+                    if (simpleFilename.EndsWith(language.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        return language;
+                    }
                 }
 
                 Logger.Debug("Unable to parse langauge from subtitle file: {0}", fileName);
