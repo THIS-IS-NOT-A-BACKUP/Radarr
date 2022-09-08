@@ -5,9 +5,9 @@ body:
 - type: checkboxes
   attributes:
     label: Is there an existing issue for this?
-    description: Please search to see if an issue already exists for the bug you encountered.
+    description: Please search to see if an open or closed issue already exists for the bug you encountered. If a bug exists and is closed note that it may only be fixed in an unstable branch. 
     options:
-    - label: I have searched the existing issues
+    - label: I have searched the existing open and closed issues
       required: true
 - type: textarea
   attributes:
@@ -42,12 +42,14 @@ body:
         - **Docker Install**: Yes
         - **Using Reverse Proxy**: No
         - **Browser**: Firefox 90 (If UI related)
+        - **Database**: Sqlite 3.36.0
     value: |
         - OS: 
         - Radarr:
         - Docker Install:
         - Using Reverse Proxy:
         - Browser:
+        - Database:
     render: markdown
   validations:
     required: true
