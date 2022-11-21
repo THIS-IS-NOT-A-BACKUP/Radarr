@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using NLog;
@@ -87,7 +87,7 @@ namespace NzbDrone.Core.Instrumentation
 
                 var connectionString = _connectionStringFactory.LogDbConnectionString;
 
-                //TODO: Probably need more robust way to differentiate what's being used
+                // TODO: Probably need more robust way to differentiate what's being used
                 if (connectionString.Contains(".db"))
                 {
                     WriteSqliteLog(log, connectionString);
@@ -128,7 +128,7 @@ namespace NzbDrone.Core.Instrumentation
         private void WriteSqliteLog(Log log, string connectionString)
         {
             using (var connection =
-                SQLiteFactory.Instance.CreateConnection())
+                new SQLiteConnection(_connectionStringFactory.LogDbConnectionString).OpenAndReturn())
             {
                 connection.ConnectionString = connectionString;
                 connection.Open();
