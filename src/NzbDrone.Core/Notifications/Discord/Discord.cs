@@ -65,8 +65,9 @@ namespace NzbDrone.Core.Notifications.Discord
                 switch ((DiscordGrabFieldType)field)
                 {
                     case DiscordGrabFieldType.Overview:
+                        var overview = message.Movie.MovieMetadata.Value.Overview ?? "";
                         discordField.Name = "Overview";
-                        discordField.Value = message.Movie.MovieMetadata.Value.Overview.Length <= 300 ? message.Movie.MovieMetadata.Value.Overview : message.Movie.MovieMetadata.Value.Overview.Substring(0, 300) + "...";
+                        discordField.Value = overview.Length <= 300 ? overview : $"{overview.AsSpan(0, 300)}...";
                         break;
                     case DiscordGrabFieldType.Rating:
                         discordField.Name = "Rating";
@@ -105,6 +106,10 @@ namespace NzbDrone.Core.Notifications.Discord
                     case DiscordGrabFieldType.CustomFormatScore:
                         discordField.Name = "Custom Format Score";
                         discordField.Value = message.RemoteMovie.CustomFormatScore.ToString();
+                        break;
+                    case DiscordGrabFieldType.Indexer:
+                        discordField.Name = "Indexer";
+                        discordField.Value = message.RemoteMovie.Release.Indexer;
                         break;
                 }
 
@@ -160,8 +165,9 @@ namespace NzbDrone.Core.Notifications.Discord
                 switch ((DiscordImportFieldType)field)
                 {
                     case DiscordImportFieldType.Overview:
+                        var overview = message.Movie.MovieMetadata.Value.Overview ?? "";
                         discordField.Name = "Overview";
-                        discordField.Value = message.Movie.MovieMetadata.Value.Overview.Length <= 300 ? message.Movie.MovieMetadata.Value.Overview : message.Movie.MovieMetadata.Value.Overview.Substring(0, 300) + "...";
+                        discordField.Value = overview.Length <= 300 ? overview : $"{overview.AsSpan(0, 300)}...";
                         break;
                     case DiscordImportFieldType.Rating:
                         discordField.Name = "Rating";
