@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
@@ -39,6 +40,8 @@ namespace NzbDrone.Core.Indexers.Rarbg
                 .Resource("/pubapi_v2.php")
                 .Accept(HttpAccept.Json);
 
+            requestBuilder.SuppressHttpErrorStatusCodes = new[] { HttpStatusCode.TooManyRequests, (HttpStatusCode)520 };
+
             if (Settings.CaptchaToken.IsNotNullOrWhiteSpace())
             {
                 requestBuilder.UseSimplifiedUserAgent = true;
@@ -68,7 +71,7 @@ namespace NzbDrone.Core.Indexers.Rarbg
             requestBuilder.AddQueryParam("limit", "100");
             requestBuilder.AddQueryParam("token", _tokenProvider.GetToken(Settings));
             requestBuilder.AddQueryParam("format", "json_extended");
-            requestBuilder.AddQueryParam("app_id", "Radarr");
+            requestBuilder.AddQueryParam("app_id", BuildInfo.AppName);
 
             yield return new IndexerRequest(requestBuilder.Build());
         }
