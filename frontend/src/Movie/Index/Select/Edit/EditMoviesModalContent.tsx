@@ -100,6 +100,10 @@ function EditMoviesModalContent(props: EditMoviesModalContentProps) {
     }
   }, [rootFolderPath, save]);
 
+  const onCancelPress = useCallback(() => {
+    setIsConfirmMoveModalOpen(false);
+  }, [setIsConfirmMoveModalOpen]);
+
   const onDoNotMoveMoviePress = useCallback(() => {
     setIsConfirmMoveModalOpen(false);
     save(false);
@@ -162,7 +166,7 @@ function EditMoviesModalContent(props: EditMoviesModalContentProps) {
 
       <ModalFooter className={styles.modalFooter}>
         <div className={styles.selected}>
-          {translate('MoviesSelectedInterp', selectedCount.toString())}
+          {translate('MoviesSelectedInterp', [selectedCount])}
         </div>
 
         <div>
@@ -177,6 +181,7 @@ function EditMoviesModalContent(props: EditMoviesModalContentProps) {
       <MoveMovieModal
         isOpen={isConfirmMoveModalOpen}
         destinationRootFolder={rootFolderPath}
+        onModalClose={onCancelPress}
         onSavePress={onDoNotMoveMoviePress}
         onMoveMoviePress={onMoveMoviePress}
       />
