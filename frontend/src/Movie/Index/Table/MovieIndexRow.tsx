@@ -87,7 +87,7 @@ function MovieIndexRow(props: MovieIndexRowProps) {
     dispatch(
       executeCommand({
         name: REFRESH_MOVIE,
-        movieId,
+        movieIds: [movieId],
       })
     );
   }, [movieId, dispatch]);
@@ -96,7 +96,7 @@ function MovieIndexRow(props: MovieIndexRowProps) {
     dispatch(
       executeCommand({
         name: MOVIE_SEARCH,
-        movieId,
+        movieIds: [movieId],
       })
     );
   }, [movieId, dispatch]);
@@ -389,15 +389,14 @@ function MovieIndexRow(props: MovieIndexRowProps) {
                 onPress={onRefreshPress}
               />
 
-              {showSearchAction && (
+              {showSearchAction ? (
                 <SpinnerIconButton
-                  className={styles.actions}
                   name={icons.SEARCH}
                   title={translate('SearchForMovie')}
                   isSpinning={isSearchingMovie}
                   onPress={onSearchPress}
                 />
-              )}
+              ) : null}
 
               <IconButton
                 name={icons.EDIT}

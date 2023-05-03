@@ -22,6 +22,7 @@ namespace NzbDrone.Core.Download
     {
         private readonly IProvideDownloadClient _downloadClientProvider;
         private readonly IDownloadClientStatusService _downloadClientStatusService;
+        private readonly IIndexerFactory _indexerFactory;
         private readonly IIndexerStatusService _indexerStatusService;
         private readonly IRateLimitService _rateLimitService;
         private readonly IEventAggregator _eventAggregator;
@@ -30,6 +31,7 @@ namespace NzbDrone.Core.Download
 
         public DownloadService(IProvideDownloadClient downloadClientProvider,
                                IDownloadClientStatusService downloadClientStatusService,
+                               IIndexerFactory indexerFactory,
                                IIndexerStatusService indexerStatusService,
                                IRateLimitService rateLimitService,
                                IEventAggregator eventAggregator,
@@ -38,6 +40,7 @@ namespace NzbDrone.Core.Download
         {
             _downloadClientProvider = downloadClientProvider;
             _downloadClientStatusService = downloadClientStatusService;
+            _indexerFactory = indexerFactory;
             _indexerStatusService = indexerStatusService;
             _rateLimitService = rateLimitService;
             _eventAggregator = eventAggregator;
@@ -67,10 +70,17 @@ namespace NzbDrone.Core.Download
                 _rateLimitService.WaitAndPulse(url.Host, TimeSpan.FromSeconds(2));
             }
 
+            IIndexer indexer = null;
+
+            if (remoteMovie.Release.IndexerId > 0)
+            {
+                indexer = _indexerFactory.GetInstance(_indexerFactory.Get(remoteMovie.Release.IndexerId));
+            }
+
             string downloadClientId;
             try
             {
-                downloadClientId = downloadClient.Download(remoteMovie);
+                downloadClientId = downloadClient.Download(remoteMovie, indexer);
                 _downloadClientStatusService.RecordSuccess(downloadClient.Definition.Id);
                 _indexerStatusService.RecordSuccess(remoteMovie.Release.IndexerId);
             }
