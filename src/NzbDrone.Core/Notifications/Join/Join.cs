@@ -48,9 +48,19 @@ namespace NzbDrone.Core.Notifications.Join
             _proxy.SendNotification(HEALTH_ISSUE_TITLE_BRANDED, message.Message, Settings);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousMessage)
+        {
+            _proxy.SendNotification(HEALTH_RESTORED_TITLE_BRANDED, $"The following issue is now resolved: {previousMessage.Message}", Settings);
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage updateMessage)
         {
             _proxy.SendNotification(APPLICATION_UPDATE_TITLE_BRANDED, updateMessage.Message, Settings);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            _proxy.SendNotification(MANUAL_INTERACTION_REQUIRED_TITLE_BRANDED, message.Message, Settings);
         }
 
         public override ValidationResult Test()

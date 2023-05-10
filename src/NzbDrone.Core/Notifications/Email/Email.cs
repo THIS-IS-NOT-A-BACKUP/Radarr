@@ -67,11 +67,23 @@ namespace NzbDrone.Core.Notifications.Email
             SendEmail(Settings, HEALTH_ISSUE_TITLE_BRANDED, message.Message);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousMessage)
+        {
+            SendEmail(Settings, HEALTH_RESTORED_TITLE_BRANDED, $"The following issue is now resolved: {previousMessage.Message}");
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage updateMessage)
         {
             var body = $"{updateMessage.Message}";
 
             SendEmail(Settings, APPLICATION_UPDATE_TITLE_BRANDED, body);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            var body = $"{message.Message} requires manual interaction.";
+
+            SendEmail(Settings, MANUAL_INTERACTION_REQUIRED_TITLE_BRANDED, body);
         }
 
         public override ValidationResult Test()

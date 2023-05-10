@@ -55,9 +55,19 @@ namespace NzbDrone.Core.Notifications.Webhook
             _proxy.SendWebhook(BuildHealthPayload(healthCheck), Settings);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousCheck)
+        {
+            _proxy.SendWebhook(BuildHealthRestoredPayload(previousCheck), Settings);
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage updateMessage)
         {
             _proxy.SendWebhook(BuildApplicationUpdatePayload(updateMessage), Settings);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            _proxy.SendWebhook(BuildManualInteractionRequiredPayload(message), Settings);
         }
 
         public override string Name => "Webhook";

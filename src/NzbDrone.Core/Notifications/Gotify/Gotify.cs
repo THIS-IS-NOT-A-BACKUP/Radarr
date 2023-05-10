@@ -53,9 +53,19 @@ namespace NzbDrone.Core.Notifications.Gotify
             SendNotification(HEALTH_ISSUE_TITLE, healthCheck.Message, null);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousCheck)
+        {
+            SendNotification(HEALTH_RESTORED_TITLE, $"The following issue is now resolved: {previousCheck.Message}", null);
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage message)
         {
             SendNotification(APPLICATION_UPDATE_TITLE, message.Message, null);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            SendNotification(MANUAL_INTERACTION_REQUIRED_TITLE, message.Message, message.Movie);
         }
 
         public override ValidationResult Test()

@@ -57,9 +57,19 @@ namespace NzbDrone.Core.Notifications.Notifiarr
             _proxy.SendNotification(BuildHealthPayload(healthCheck), Settings);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousCheck)
+        {
+            _proxy.SendNotification(BuildHealthRestoredPayload(previousCheck), Settings);
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage updateMessage)
         {
             _proxy.SendNotification(BuildApplicationUpdatePayload(updateMessage), Settings);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            _proxy.SendNotification(BuildManualInteractionRequiredPayload(message), Settings);
         }
 
         public override ValidationResult Test()

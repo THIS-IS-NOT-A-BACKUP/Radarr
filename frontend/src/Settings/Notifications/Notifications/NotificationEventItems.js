@@ -24,7 +24,9 @@ function NotificationEventItems(props) {
     onMovieFileDelete,
     onMovieFileDeleteForUpgrade,
     onHealthIssue,
+    onHealthRestored,
     onApplicationUpdate,
+    onManualInteractionRequired,
     supportsOnGrab,
     supportsOnDownload,
     supportsOnUpgrade,
@@ -34,7 +36,9 @@ function NotificationEventItems(props) {
     supportsOnMovieFileDelete,
     supportsOnMovieFileDeleteForUpgrade,
     supportsOnApplicationUpdate,
+    supportsOnManualInteractionRequired,
     supportsOnHealthIssue,
+    supportsOnHealthRestored,
     includeHealthWarnings
   } = item;
 
@@ -152,8 +156,19 @@ function NotificationEventItems(props) {
             />
           </div>
 
+          <div>
+            <FormInputGroup
+              type={inputTypes.CHECK}
+              name="onHealthRestored"
+              helpText={translate('OnHealthRestoredHelpText')}
+              isDisabled={!supportsOnHealthRestored.value}
+              {...onHealthRestored}
+              onChange={onInputChange}
+            />
+          </div>
+
           {
-            onHealthIssue.value &&
+            (onHealthIssue.value || onHealthRestored.value) &&
               <div>
                 <FormInputGroup
                   type={inputTypes.CHECK}
@@ -173,6 +188,17 @@ function NotificationEventItems(props) {
               helpText={translate('OnApplicationUpdateHelpText')}
               isDisabled={!supportsOnApplicationUpdate.value}
               {...onApplicationUpdate}
+              onChange={onInputChange}
+            />
+          </div>
+
+          <div>
+            <FormInputGroup
+              type={inputTypes.CHECK}
+              name="onManualInteractionRequired"
+              helpText={translate('OnManualInteractionRequiredHelpText')}
+              isDisabled={!supportsOnManualInteractionRequired.value}
+              {...onManualInteractionRequired}
               onChange={onInputChange}
             />
           </div>

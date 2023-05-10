@@ -3,6 +3,7 @@ using System.Linq;
 using NLog;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Download;
+using NzbDrone.Core.Download.TrackedDownloads;
 using NzbDrone.Core.HealthCheck;
 using NzbDrone.Core.MediaFiles.Events;
 using NzbDrone.Core.Messaging.Events;
@@ -23,7 +24,9 @@ namespace NzbDrone.Core.Notifications
           IHandle<MoviesImportedEvent>,
           IHandle<MovieFileDeletedEvent>,
           IHandle<HealthCheckFailedEvent>,
+          IHandle<HealthCheckRestoredEvent>,
           IHandle<UpdateInstalledEvent>,
+          IHandle<ManualInteractionRequiredEvent>,
           IHandleAsync<DeleteCompletedEvent>,
           IHandleAsync<DownloadsProcessedEvent>,
           IHandleAsync<RenameCompletedEvent>,
@@ -236,6 +239,39 @@ namespace NzbDrone.Core.Notifications
             }
         }
 
+        public void Handle(ManualInteractionRequiredEvent message)
+        {
+            var manualInteractionMessage = new ManualInteractionRequiredMessage
+            {
+                Message = GetMessage(message.RemoteMovie.Movie, message.RemoteMovie.Movie.MovieFile.Quality),
+                Movie = message.RemoteMovie.Movie,
+                Quality = message.RemoteMovie.ParsedMovieInfo.Quality,
+                RemoteMovie = message.RemoteMovie,
+                TrackedDownload = message.TrackedDownload,
+                DownloadClientType = message.TrackedDownload.DownloadItem.DownloadClientInfo.Type,
+                DownloadClientName = message.TrackedDownload.DownloadItem.DownloadClientInfo.Name,
+                DownloadId = message.TrackedDownload.DownloadItem.DownloadId,
+                Release = message.Release
+            };
+
+            foreach (var notification in _notificationFactory.OnManualInteractionEnabled())
+            {
+                try
+                {
+                    if (!ShouldHandleMovie(notification.Definition, message.RemoteMovie.Movie))
+                    {
+                        continue;
+                    }
+
+                    notification.OnManualInteractionRequired(manualInteractionMessage);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Unable to send OnManualInteractionRequired notification to {0}", notification.Definition.Name);
+                }
+            }
+        }
+
         public void Handle(MovieFileDeletedEvent message)
         {
             var deleteMessage = new MovieFileDeleteMessage();
@@ -307,6 +343,29 @@ namespace NzbDrone.Core.Notifications
                 catch (Exception ex)
                 {
                     _logger.Warn(ex, "Unable to send OnHealthIssue notification to: " + notification.Definition.Name);
+                }
+            }
+        }
+
+        public void Handle(HealthCheckRestoredEvent message)
+        {
+            if (message.IsInStartupGracePeriod)
+            {
+                return;
+            }
+
+            foreach (var notification in _notificationFactory.OnHealthRestoredEnabled())
+            {
+                try
+                {
+                    if (ShouldHandleHealthFailure(message.PreviousCheck, ((NotificationDefinition)notification.Definition).IncludeHealthWarnings))
+                    {
+                        notification.OnHealthRestored(message.PreviousCheck);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Warn(ex, "Unable to send OnHealthRestored notification to: " + notification.Definition.Name);
                 }
             }
         }

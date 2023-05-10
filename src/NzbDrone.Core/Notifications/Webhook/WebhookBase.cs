@@ -4,6 +4,7 @@ using System.Linq;
 using NzbDrone.Core.Configuration;
 using NzbDrone.Core.MediaFiles;
 using NzbDrone.Core.Movies;
+using NzbDrone.Core.Parser.Model;
 using NzbDrone.Core.ThingiProvider;
 
 namespace NzbDrone.Core.Notifications.Webhook
@@ -143,6 +144,19 @@ namespace NzbDrone.Core.Notifications.Webhook
             };
         }
 
+        protected WebhookHealthPayload BuildHealthRestoredPayload(HealthCheck.HealthCheck healthCheck)
+        {
+            return new WebhookHealthPayload
+            {
+                EventType = WebhookEventType.HealthRestored,
+                InstanceName = _configFileProvider.InstanceName,
+                Level = healthCheck.Type,
+                Message = healthCheck.Message,
+                Type = healthCheck.Source.Name,
+                WikiUrl = healthCheck.WikiUrl?.ToString()
+            };
+        }
+
         protected WebhookApplicationUpdatePayload BuildApplicationUpdatePayload(ApplicationUpdateMessage updateMessage)
         {
             return new WebhookApplicationUpdatePayload
@@ -153,6 +167,26 @@ namespace NzbDrone.Core.Notifications.Webhook
                 Message = updateMessage.Message,
                 PreviousVersion = updateMessage.PreviousVersion.ToString(),
                 NewVersion = updateMessage.NewVersion.ToString()
+            };
+        }
+
+        protected WebhookManualInteractionPayload BuildManualInteractionRequiredPayload(ManualInteractionRequiredMessage message)
+        {
+            var remoteMovie = message.RemoteMovie;
+            var quality = message.Quality;
+
+            return new WebhookManualInteractionPayload
+            {
+                EventType = WebhookEventType.ManualInteractionRequired,
+                InstanceName = _configFileProvider.InstanceName,
+                ApplicationUrl = _configService.ApplicationUrl,
+                Movie = new WebhookMovie(message.Movie),
+                DownloadInfo = new WebhookDownloadClientItem(quality, message.TrackedDownload.DownloadItem),
+                DownloadClient = message.DownloadClientName,
+                DownloadClientType = message.DownloadClientType,
+                DownloadId = message.DownloadId,
+                CustomFormatInfo = new WebhookCustomFormatInfo(remoteMovie.CustomFormats, remoteMovie.CustomFormatScore),
+                Release = new WebhookGrabbedRelease(message.Release)
             };
         }
 

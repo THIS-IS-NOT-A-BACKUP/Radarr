@@ -17,7 +17,9 @@ namespace NzbDrone.Core.Notifications
         List<INotification> OnMovieDeleteEnabled();
         List<INotification> OnMovieFileDeleteEnabled();
         List<INotification> OnHealthIssueEnabled();
+        List<INotification> OnHealthRestoredEnabled();
         List<INotification> OnApplicationUpdateEnabled();
+        List<INotification> OnManualInteractionEnabled();
     }
 
     public class NotificationFactory : ProviderFactory<INotification, NotificationDefinition>, INotificationFactory
@@ -72,9 +74,19 @@ namespace NzbDrone.Core.Notifications
             return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnHealthIssue).ToList();
         }
 
+        public List<INotification> OnHealthRestoredEnabled()
+        {
+            return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnHealthRestored).ToList();
+        }
+
         public List<INotification> OnApplicationUpdateEnabled()
         {
             return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnApplicationUpdate).ToList();
+        }
+
+        public List<INotification> OnManualInteractionEnabled()
+        {
+            return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnManualInteractionRequired).ToList();
         }
 
         public override void SetProviderCharacteristics(INotification provider, NotificationDefinition definition)
@@ -90,7 +102,9 @@ namespace NzbDrone.Core.Notifications
             definition.SupportsOnMovieFileDelete = provider.SupportsOnMovieFileDelete;
             definition.SupportsOnMovieFileDeleteForUpgrade = provider.SupportsOnMovieFileDeleteForUpgrade;
             definition.SupportsOnHealthIssue = provider.SupportsOnHealthIssue;
+            definition.SupportsOnHealthRestored = provider.SupportsOnHealthRestored;
             definition.SupportsOnApplicationUpdate = provider.SupportsOnApplicationUpdate;
+            definition.SupportsOnManualInteractionRequired = provider.SupportsOnManualInteractionRequired;
         }
     }
 }

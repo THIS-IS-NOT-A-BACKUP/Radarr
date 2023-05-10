@@ -54,9 +54,19 @@ namespace NzbDrone.Core.Notifications.Mailgun
             _proxy.SendNotification(HEALTH_ISSUE_TITLE, healthCheckMessage.Message, Settings);
         }
 
+        public override void OnHealthRestored(HealthCheck.HealthCheck previousCheckMessage)
+        {
+            _proxy.SendNotification(HEALTH_RESTORED_TITLE_BRANDED, $"The following issue is now resolved: {previousCheckMessage.Message}", Settings);
+        }
+
         public override void OnApplicationUpdate(ApplicationUpdateMessage updateMessage)
         {
             _proxy.SendNotification(APPLICATION_UPDATE_TITLE, updateMessage.Message, Settings);
+        }
+
+        public override void OnManualInteractionRequired(ManualInteractionRequiredMessage message)
+        {
+            _proxy.SendNotification(MANUAL_INTERACTION_REQUIRED_TITLE, message.Message, Settings);
         }
 
         public override ValidationResult Test()
