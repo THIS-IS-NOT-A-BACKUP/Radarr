@@ -51,7 +51,7 @@ namespace NzbDrone.Core.ImportLists.Radarr
                         continue;
                     }
 
-                    if (Settings.RootFolderPaths.Any() && !Settings.RootFolderPaths.Any(rootFolderPath => remoteMovie.RootFolderPath.ContainsIgnoreCase(rootFolderPath)))
+                    if (Settings.RootFolderPaths.Any() && !Settings.RootFolderPaths.Any(rootFolderPath => remoteMovie.Path.ContainsIgnoreCase(rootFolderPath)))
                     {
                         continue;
                     }
@@ -129,8 +129,8 @@ namespace NzbDrone.Core.ImportLists.Radarr
                     options = remoteRootfolders.OrderBy(d => d.Path, StringComparer.InvariantCultureIgnoreCase)
                         .Select(d => new
                         {
-                            value = d.Path,
-                            name = d.Path
+                            Value = d.Path,
+                            Name = d.Path
                         })
                 };
             }
