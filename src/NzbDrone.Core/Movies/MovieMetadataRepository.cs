@@ -55,9 +55,7 @@ namespace NzbDrone.Core.Movies
                 builder,
                 (metadata, translation) =>
                 {
-                    MovieMetadata movieEntry;
-
-                    if (!movieDictionary.TryGetValue(metadata.Id, out movieEntry))
+                    if (!movieDictionary.TryGetValue(metadata.Id, out var movieEntry))
                     {
                         movieEntry = metadata;
                         movieDictionary.Add(movieEntry.Id, movieEntry);
@@ -90,7 +88,7 @@ namespace NzbDrone.Core.Movies
             var existingMetadata = FindById(data.Select(x => x.TmdbId).ToList());
             var updateMetadataList = new List<MovieMetadata>();
             var addMetadataList = new List<MovieMetadata>();
-            int upToDateMetadataCount = 0;
+            var upToDateMetadataCount = 0;
 
             foreach (var meta in data)
             {

@@ -437,7 +437,7 @@ namespace NzbDrone.Core.Parser
             value = Regex.Replace(value, @"\s", "-", RegexOptions.Compiled);
 
             // Should invalid characters be replaced with dash or empty string?
-            string replaceCharacter = invalidDashReplacement ? "-" : string.Empty;
+            var replaceCharacter = invalidDashReplacement ? "-" : string.Empty;
 
             // Remove invalid chars
             value = Regex.Replace(value, @"[^a-z0-9\s-_]", replaceCharacter, RegexOptions.Compiled);
@@ -459,10 +459,8 @@ namespace NzbDrone.Core.Parser
 
         public static string CleanMovieTitle(this string title)
         {
-            long number = 0;
-
             // If Title only contains numbers return it as is.
-            if (long.TryParse(title, out number))
+            if (long.TryParse(title, out _))
             {
                 return title;
             }
@@ -550,9 +548,8 @@ namespace NzbDrone.Core.Parser
             if (matches.Count != 0)
             {
                 var group = matches.OfType<Match>().Last().Groups["releasegroup"].Value;
-                int groupIsNumeric;
 
-                if (int.TryParse(group, out groupIsNumeric))
+                if (int.TryParse(group, out _))
                 {
                     return null;
                 }
@@ -596,9 +593,9 @@ namespace NzbDrone.Core.Parser
 
             var parts = movieName.Split('.');
             movieName = "";
-            int n = 0;
-            bool previousAcronym = false;
-            string nextPart = "";
+            var n = 0;
+            var previousAcronym = false;
+            var nextPart = "";
             foreach (var part in parts)
             {
                 if (parts.Length >= n + 2)
