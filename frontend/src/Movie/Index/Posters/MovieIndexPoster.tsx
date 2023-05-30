@@ -16,6 +16,7 @@ import MovieIndexPosterSelect from 'Movie/Index/Select/MovieIndexPosterSelect';
 import MoviePoster from 'Movie/MoviePoster';
 import { executeCommand } from 'Store/Actions/commandActions';
 import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
+import getRelativeDate from 'Utilities/Date/getRelativeDate';
 import translate from 'Utilities/String/translate';
 import createMovieIndexItemSelector from '../createMovieIndexItemSelector';
 import MovieIndexPosterInfo from './MovieIndexPosterInfo';
@@ -46,9 +47,8 @@ function MovieIndexPoster(props: MovieIndexPosterProps) {
     showSearchAction,
   } = useSelector(selectPosterOptions);
 
-  const { showRelativeDates, shortDateFormat, timeFormat } = useSelector(
-    createUISettingsSelector()
-  );
+  const { showRelativeDates, shortDateFormat, longDateFormat, timeFormat } =
+    useSelector(createUISettingsSelector());
 
   const {
     title,
@@ -62,12 +62,17 @@ function MovieIndexPoster(props: MovieIndexPosterProps) {
     isAvailable,
     studio,
     added,
+    year,
     inCinemas,
     physicalRelease,
     digitalRelease,
     path,
     movieFile,
+    ratings,
+    sizeOnDisk,
     certification,
+    originalTitle,
+    originalLanguage,
   } = movie;
 
   const dispatch = useDispatch();
@@ -124,6 +129,20 @@ function MovieIndexPoster(props: MovieIndexPosterProps) {
     width: `${posterWidth}px`,
     height: `${posterHeight}px`,
   };
+
+  let releaseDate = '';
+  let releaseDateType = '';
+  if (physicalRelease && digitalRelease) {
+    releaseDate =
+      physicalRelease < digitalRelease ? physicalRelease : digitalRelease;
+    releaseDateType = physicalRelease < digitalRelease ? 'Released' : 'Digital';
+  } else if (physicalRelease && !digitalRelease) {
+    releaseDate = physicalRelease;
+    releaseDateType = 'Released';
+  } else if (digitalRelease && !physicalRelease) {
+    releaseDate = digitalRelease;
+    releaseDateType = 'Digital';
+  }
 
   return (
     <div className={styles.content}>
@@ -211,25 +230,55 @@ function MovieIndexPoster(props: MovieIndexPosterProps) {
       ) : null}
 
       {showQualityProfile ? (
-        <div className={styles.title}>{qualityProfile.name}</div>
+        <div className={styles.title} title={translate('QualityProfile')}>
+          {qualityProfile.name}
+        </div>
+      ) : null}
+
+      {showCinemaRelease && inCinemas ? (
+        <div className={styles.title} title={translate('InCinemas')}>
+          <Icon name={icons.IN_CINEMAS} />{' '}
+          {getRelativeDate(inCinemas, shortDateFormat, showRelativeDates, {
+            timeFormat,
+            timeForToday: false,
+          })}
+        </div>
+      ) : null}
+
+      {showReleaseDate && releaseDate ? (
+        <div className={styles.title}>
+          <Icon
+            name={releaseDateType === 'Digital' ? icons.MOVIE_FILE : icons.DISC}
+          />{' '}
+          {getRelativeDate(releaseDate, shortDateFormat, showRelativeDates, {
+            timeFormat,
+            timeForToday: false,
+          })}
+        </div>
       ) : null}
 
       <MovieIndexPosterInfo
         studio={studio}
         qualityProfile={qualityProfile}
         added={added}
+        year={year}
         showQualityProfile={showQualityProfile}
         showCinemaRelease={showCinemaRelease}
         showReleaseDate={showReleaseDate}
         showRelativeDates={showRelativeDates}
         shortDateFormat={shortDateFormat}
+        longDateFormat={longDateFormat}
         timeFormat={timeFormat}
         inCinemas={inCinemas}
         physicalRelease={physicalRelease}
         digitalRelease={digitalRelease}
+        ratings={ratings}
+        sizeOnDisk={sizeOnDisk}
         sortKey={sortKey}
         path={path}
         certification={certification}
+        originalTitle={originalTitle}
+        originalLanguage={originalLanguage}
       />
 
       <EditMovieModalConnector
