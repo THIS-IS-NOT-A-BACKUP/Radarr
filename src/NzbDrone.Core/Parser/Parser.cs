@@ -120,11 +120,12 @@ namespace NzbDrone.Core.Parser
 
         private static readonly Regex SimpleReleaseTitleRegex = new Regex(@"\s*(?:[<>?*:|])", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private static readonly RegexReplace WebsitePrefixRegex = new RegexReplace(@"^\[\s*[-a-z]+(\.[a-z]+)+\s*\][- ]*|^www\.[a-z0-9]+\.(?:com|net|org|casa|pics|tc)[ -]*",
+        // Valid TLDs http://data.iana.org/TLD/tlds-alpha-by-domain.txt
+        private static readonly RegexReplace WebsitePrefixRegex = new RegexReplace(@"^(?:\[\s*)?(?:www\.)?[-a-z0-9-]{1,256}\.(?:[a-z]{2,6}\.[a-z]{2,6}|xn--[a-z0-9-]{4,}|[a-z]{2,})\b(?:\s*\]|[ -]{2,})[ -]*",
                                                                 string.Empty,
                                                                 RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private static readonly RegexReplace WebsitePostfixRegex = new RegexReplace(@"\[\s*[-a-z]+(\.[a-z0-9]+)+\s*\]$",
+        private static readonly RegexReplace WebsitePostfixRegex = new RegexReplace(@"(?:\[\s*)?(?:www\.)?[-a-z0-9-]{1,256}\.(?:xn--[a-z0-9-]{4,}|[a-z]{2,6})\b(?:\s*\])$",
                                                         string.Empty,
                                                         RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -152,7 +153,7 @@ namespace NzbDrone.Core.Parser
 
         // Handle Exception Release Groups that don't follow -RlsGrp; Manual List
         // groups whose releases end with RlsGroup) or RlsGroup]
-        private static readonly Regex ExceptionReleaseGroupRegex = new Regex(@"(?<releasegroup>(Joy|YIFY|YTS.(MX|LT|AG)|FreetheFish|afm72|Anna|Bandi|Ghost|Kappa|MONOLITH|Qman|RZeroX|SAMPA|Silence|theincognito|t3nzin|Vyndros|HDO|DusIctv|DHD|SEV|CtrlHD|-ZR-|ADC|XZVN|RH|Kametsu|r00t|HONE)(?=\]|\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static readonly Regex ExceptionReleaseGroupRegex = new Regex(@"(?<releasegroup>(Joy|YIFY|YTS.(MX|LT|AG)|FreetheFish|afm72|Anna|Bandi|Ghost|Kappa|MONOLITH|Qman|RZeroX|SAMPA|Silence|theincognito|t3nzin|Vyndros|HDO|DusIctv|DHD|SEV|CtrlHD|-ZR-|ADC|XZVN|RH|Kametsu|r00t|HONE|Vyndros)(?=\]|\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
        // Handle Exception Release Groups that don't follow -RlsGrp; Manual List
        // name only...BE VERY CAREFUL WITH THIS, HIGH CHANCE OF FALSE POSITIVES
