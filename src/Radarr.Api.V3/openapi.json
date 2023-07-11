@@ -4434,53 +4434,6 @@
         }
       }
     },
-    "/api/v3/metadata/bulk": {
-      "put": {
-        "tags": [
-          "Metadata"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MetadataBulkResource"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MetadataResource"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Metadata"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MetadataBulkResource"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/v3/metadata/schema": {
       "get": {
         "tags": [
@@ -5807,53 +5760,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/v3/notification/bulk": {
-      "put": {
-        "tags": [
-          "Notification"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotificationBulkResource"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotificationResource"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Notification"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotificationBulkResource"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
           }
         }
       }
@@ -9999,6 +9905,7 @@
           "tmdb",
           "trakt",
           "plex",
+          "simkl",
           "other",
           "advanced"
         ],
@@ -10609,31 +10516,6 @@
           },
           "enableMediaInfo": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MetadataBulkResource": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "applyTags": {
-            "$ref": "#/components/schemas/ApplyTags"
           }
         },
         "additionalProperties": false
@@ -11415,31 +11297,6 @@
         },
         "additionalProperties": false
       },
-      "NotificationBulkResource": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "applyTags": {
-            "$ref": "#/components/schemas/ApplyTags"
-          }
-        },
-        "additionalProperties": false
-      },
       "NotificationResource": {
         "type": "object",
         "properties": {
@@ -11945,6 +11802,10 @@
               "$ref": "#/components/schemas/CustomFormatResource"
             },
             "nullable": true
+          },
+          "customFormatScore": {
+            "type": "integer",
+            "format": "int32"
           },
           "size": {
             "type": "number",
@@ -12698,6 +12559,14 @@
             "nullable": true
           },
           "indexerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "downloadClientIds": {
             "type": "array",
             "items": {
               "type": "integer",
