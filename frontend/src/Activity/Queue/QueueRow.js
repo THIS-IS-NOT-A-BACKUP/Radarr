@@ -8,14 +8,15 @@ import ProgressBar from 'Components/ProgressBar';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
 import TableRow from 'Components/Table/TableRow';
-import { icons, kinds } from 'Helpers/Props';
+import Tooltip from 'Components/Tooltip/Tooltip';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
 import InteractiveImportModal from 'InteractiveImport/InteractiveImportModal';
 import MovieFormats from 'Movie/MovieFormats';
 import MovieLanguage from 'Movie/MovieLanguage';
 import MovieQuality from 'Movie/MovieQuality';
 import MovieTitleLink from 'Movie/MovieTitleLink';
 import formatBytes from 'Utilities/Number/formatBytes';
-import formatPreferredWordScore from 'Utilities/Number/formatPreferredWordScore';
+import formatCustomFormatScore from 'Utilities/Number/formatCustomFormatScore';
 import translate from 'Utilities/String/translate';
 import QueueStatusCell from './QueueStatusCell';
 import RemoveQueueItemModal from './RemoveQueueItemModal';
@@ -209,7 +210,14 @@ class QueueRow extends Component {
                   key={name}
                   className={styles.customFormatScore}
                 >
-                  {formatPreferredWordScore(customFormatScore)}
+                  <Tooltip
+                    anchor={formatCustomFormatScore(
+                      customFormatScore,
+                      customFormats.length
+                    )}
+                    tooltip={<MovieFormats formats={customFormats} />}
+                    position={tooltipPositions.BOTTOM}
+                  />
                 </TableRowCell>
               );
             }
@@ -404,6 +412,7 @@ QueueRow.propTypes = {
 };
 
 QueueRow.defaultProps = {
+  customFormats: [],
   isGrabbing: false,
   isRemoving: false
 };
