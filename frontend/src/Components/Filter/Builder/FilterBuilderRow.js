@@ -210,11 +210,13 @@ class FilterBuilderRow extends Component {
     const selectedFilterBuilderProp = this.selectedFilterBuilderProp;
 
     const keyOptions = filterBuilderProps.map((availablePropFilter) => {
+      const { name, label } = availablePropFilter;
+
       return {
-        key: availablePropFilter.name,
-        value: availablePropFilter.label
+        key: name,
+        value: typeof label === 'function' ? label() : label
       };
-    });
+    }).sort((a, b) => a.value.localeCompare(b.value));
 
     const ValueComponent = getRowValueConnector(selectedFilterBuilderProp);
 
