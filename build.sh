@@ -392,20 +392,19 @@ then
     fi
 fi
 
-if [ "$FRONTEND" = "YES" ];
+if [[ "$LINT" = "YES" || "$FRONTEND" = "YES" ]];
 then
     YarnInstall
-    RunWebpack
 fi
 
 if [ "$LINT" = "YES" ];
 then
-    if [ -z "$FRONTEND" ];
-    then
-        YarnInstall
-    fi
-    
     LintUI
+fi
+
+if [ "$FRONTEND" = "YES" ];
+then
+    RunWebpack
 fi
 
 if [ "$PACKAGES" = "YES" ];
