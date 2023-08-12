@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using NLog;
 using NzbDrone.Common.EnsureThat;
 using NzbDrone.Common.Extensions;
@@ -16,7 +17,7 @@ namespace NzbDrone.Core.Download
 {
     public interface IDownloadService
     {
-        void DownloadReport(RemoteMovie remoteMovie);
+        Task DownloadReport(RemoteMovie remoteMovie);
     }
 
     public class DownloadService : IDownloadService
@@ -49,14 +50,22 @@ namespace NzbDrone.Core.Download
             _logger = logger;
         }
 
-        public void DownloadReport(RemoteMovie remoteMovie)
+        public async Task DownloadReport(RemoteMovie remoteMovie)
+        {
+            var filterBlockedClients = remoteMovie.Release.PendingReleaseReason == PendingReleaseReason.DownloadClientUnavailable;
+
+            var tags = remoteMovie.Movie?.Tags;
+
+            var downloadClient = _downloadClientProvider.GetDownloadClient(remoteMovie.Release.DownloadProtocol, remoteMovie.Release.IndexerId, filterBlockedClients, tags);
+
+            await DownloadReport(remoteMovie, downloadClient);
+        }
+
+        public async Task DownloadReport(RemoteMovie remoteMovie, IDownloadClient downloadClient)
         {
             Ensure.That(remoteMovie.Movie, () => remoteMovie.Movie).IsNotNull();
 
             var downloadTitle = remoteMovie.Release.Title;
-            var filterBlockedClients = remoteMovie.Release.PendingReleaseReason == PendingReleaseReason.DownloadClientUnavailable;
-            var tags = remoteMovie.Movie?.Tags;
-            var downloadClient = _downloadClientProvider.GetDownloadClient(remoteMovie.Release.DownloadProtocol, remoteMovie.Release.IndexerId, filterBlockedClients, tags);
 
             if (downloadClient == null)
             {
@@ -70,7 +79,7 @@ namespace NzbDrone.Core.Download
             if (remoteMovie.Release.DownloadUrl.IsNotNullOrWhiteSpace() && !remoteMovie.Release.DownloadUrl.StartsWith("magnet:"))
             {
                 var url = new HttpUri(remoteMovie.Release.DownloadUrl);
-                _rateLimitService.WaitAndPulse(url.Host, TimeSpan.FromSeconds(2));
+                await _rateLimitService.WaitAndPulseAsync(url.Host, TimeSpan.FromSeconds(2));
             }
 
             IIndexer indexer = null;
@@ -83,7 +92,7 @@ namespace NzbDrone.Core.Download
             string downloadClientId;
             try
             {
-                downloadClientId = downloadClient.Download(remoteMovie, indexer);
+                downloadClientId = await downloadClient.Download(remoteMovie, indexer);
                 _downloadClientStatusService.RecordSuccess(downloadClient.Definition.Id);
                 _indexerStatusService.RecordSuccess(remoteMovie.Release.IndexerId);
             }
@@ -99,8 +108,7 @@ namespace NzbDrone.Core.Download
             }
             catch (ReleaseDownloadException ex)
             {
-                var http429 = ex.InnerException as TooManyRequestsException;
-                if (http429 != null)
+                if (ex.InnerException is TooManyRequestsException http429)
                 {
                     _indexerStatusService.RecordFailure(remoteMovie.Release.IndexerId, http429.RetryAfter);
                 }

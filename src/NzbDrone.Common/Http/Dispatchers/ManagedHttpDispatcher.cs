@@ -43,9 +43,13 @@ namespace NzbDrone.Common.Http.Dispatchers
             _credentialCache = cacheManager.GetCache<CredentialCache>(typeof(ManagedHttpDispatcher), "credentialcache");
         }
 
-        public HttpResponse GetResponse(HttpRequest request, CookieContainer cookies)
+        public async Task<HttpResponse> GetResponseAsync(HttpRequest request, CookieContainer cookies)
         {
-            var requestMessage = new HttpRequestMessage(request.Method, (Uri)request.Url);
+            var requestMessage = new HttpRequestMessage(request.Method, (Uri)request.Url)
+            {
+                Version = HttpVersion.Version20,
+                VersionPolicy = HttpVersionPolicy.RequestVersionOrLower
+            };
             requestMessage.Headers.UserAgent.ParseAdd(_userAgentBuilder.GetUserAgent(request.UseSimplifiedUserAgent));
             requestMessage.Headers.ConnectionClose = !request.ConnectionKeepAlive;
 
@@ -98,7 +102,7 @@ namespace NzbDrone.Common.Http.Dispatchers
 
             var httpClient = GetClient(request.Url);
 
-            using var responseMessage = httpClient.Send(requestMessage, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+            using var responseMessage = await httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead, cts.Token);
             {
                 byte[] data = null;
 
@@ -106,7 +110,7 @@ namespace NzbDrone.Common.Http.Dispatchers
                 {
                     if (request.ResponseStream != null && responseMessage.StatusCode == HttpStatusCode.OK)
                     {
-                        responseMessage.Content.CopyTo(request.ResponseStream, null, cts.Token);
+                        await responseMessage.Content.CopyToAsync(request.ResponseStream, null, cts.Token);
                     }
                     else
                     {
@@ -122,7 +126,7 @@ namespace NzbDrone.Common.Http.Dispatchers
 
                 headers.Add(responseMessage.Content.Headers.ToNameValueCollection());
 
-                return new HttpResponse(request, new HttpHeader(headers), data, responseMessage.StatusCode);
+                return new HttpResponse(request, new HttpHeader(headers), data, responseMessage.StatusCode, responseMessage.Version);
             }
         }
 
@@ -159,6 +163,8 @@ namespace NzbDrone.Common.Http.Dispatchers
 
             var client = new System.Net.Http.HttpClient(handler)
             {
+                DefaultRequestVersion = HttpVersion.Version20,
+                DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
                 Timeout = Timeout.InfiniteTimeSpan
             };
 
