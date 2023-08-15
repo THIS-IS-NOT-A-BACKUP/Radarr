@@ -34,6 +34,7 @@ namespace NzbDrone.Core.Configuration
         bool EnableSsl { get; }
         bool LaunchBrowser { get; }
         AuthenticationType AuthenticationMethod { get; }
+        AuthenticationRequiredType AuthenticationRequired { get; }
         bool AnalyticsEnabled { get; }
         string LogLevel { get; }
         string ConsoleLogLevel { get; }
@@ -192,6 +193,8 @@ namespace NzbDrone.Core.Configuration
             }
         }
 
+        public AuthenticationRequiredType AuthenticationRequired => GetValueEnum("AuthenticationRequired", AuthenticationRequiredType.Enabled);
+
         public bool AnalyticsEnabled => GetValueBoolean("AnalyticsEnabled", true, persist: false);
 
         public string Branch => GetValue("Branch", "master").ToLowerInvariant();
@@ -222,7 +225,7 @@ namespace NzbDrone.Core.Configuration
                     return urlBase;
                 }
 
-                return "/" + urlBase.Trim('/').ToLower();
+                return "/" + urlBase;
             }
         }
 
