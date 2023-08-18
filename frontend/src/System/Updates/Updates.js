@@ -31,7 +31,6 @@ class Updates extends Component {
       items,
       isInstallingUpdate,
       updateMechanism,
-      isDocker,
       updateMechanismMessage,
       shortDateFormat,
       longDateFormat,
@@ -71,7 +70,7 @@ class Updates extends Component {
             hasUpdateToInstall &&
               <div className={styles.messageContainer}>
                 {
-                  (updateMechanism === 'builtIn' || updateMechanism === 'script') && !isDocker ?
+                  updateMechanism === 'builtIn' || updateMechanism === 'script' ?
                     <SpinnerButton
                       className={styles.updateAvailable}
                       kind={kinds.PRIMARY}
@@ -112,7 +111,6 @@ class Updates extends Component {
                   name={icons.CHECK_CIRCLE}
                   size={30}
                 />
-
                 <div className={styles.message}>
                   {translate('OnLatestVersion')}
                 </div>
@@ -151,7 +149,7 @@ class Updates extends Component {
 
                           {
                             update.branch === 'master' ?
-                              null:
+                              null :
                               <Label
                                 className={styles.label}
                               >
@@ -240,7 +238,6 @@ Updates.propTypes = {
   generalSettingsError: PropTypes.object,
   items: PropTypes.array.isRequired,
   isInstallingUpdate: PropTypes.bool.isRequired,
-  isDocker: PropTypes.bool.isRequired,
   updateMechanism: PropTypes.string,
   updateMechanismMessage: PropTypes.string,
   shortDateFormat: PropTypes.string.isRequired,
