@@ -28,10 +28,20 @@
   white-space: nowrap;
 }
 
+.languages,
+.audio,
+.video,
 .actions {
   composes: cell from '~Components/Table/Cells/TableRowCell.css';
 
   width: 100px;
+}
+
+.audioLanguages,
+.subtitles {
+  composes: cell from '~Components/Table/Cells/TableRowCell.css';
+
+  width: 165px;
 }
 
 .releaseGroup {
