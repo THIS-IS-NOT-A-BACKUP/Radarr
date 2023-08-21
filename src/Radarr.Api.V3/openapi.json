@@ -639,29 +639,21 @@
               "type": "boolean",
               "default": false
             }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MovieResource"
-                  }
-                }
-              },
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MovieResource"
-                  }
-                }
-              },
-              "text/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -8487,21 +8479,6 @@
           "cleanTitle": {
             "type": "string",
             "nullable": true
-          },
-          "sourceId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "votes": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "voteCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "language": {
-            "$ref": "#/components/schemas/Language"
           }
         },
         "additionalProperties": false
@@ -8527,21 +8504,6 @@
           "cleanTitle": {
             "type": "string",
             "nullable": true
-          },
-          "sourceId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "votes": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "voteCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "language": {
-            "$ref": "#/components/schemas/Language"
           }
         },
         "additionalProperties": false
@@ -10720,13 +10682,17 @@
             "type": "string",
             "nullable": true
           },
-          "videoDynamicRangeType": {
-            "type": "string",
-            "nullable": true
-          },
           "videoFps": {
             "type": "number",
             "format": "double"
+          },
+          "videoDynamicRange": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoDynamicRangeType": {
+            "type": "string",
+            "nullable": true
           },
           "resolution": {
             "type": "string",
