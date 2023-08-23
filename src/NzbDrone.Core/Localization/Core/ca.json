@@ -950,7 +950,6 @@
     "UnableToAddANewQualityProfilePleaseTryAgain": "No es pot afegir un perfil de qualitat nou, torneu-ho a provar.",
     "UnableToAddANewRemotePathMappingPleaseTryAgain": "No es pot afegir una nova assignació de camins remots, torneu-ho a provar.",
     "UnableToLoadDelayProfiles": "No es poden carregar els perfils de retard",
-    "UnableToLoadDownloadClients": "No es poden carregar els clients de baixada",
     "UnableToLoadGeneralSettings": "No es pot carregar la configuració general",
     "UnableToLoadHistory": "No es pot carregar l'historial",
     "UnableToLoadIndexerOptions": "No es poden carregar les opcions de l'indexador",
@@ -1170,5 +1169,9 @@
     "AddConnection": "Edita la col·lecció",
     "NotificationStatusAllClientHealthCheckMessage": "Totes les llistes no estan disponibles a causa d'errors",
     "NotificationStatusSingleClientHealthCheckMessage": "Llistes no disponibles a causa d'errors: {0}",
-    "BypassDelayIfAboveCustomFormatScoreMinimumScore": "Puntuació mínima de format personalitzat"
+    "BypassDelayIfAboveCustomFormatScoreMinimumScore": "Puntuació mínima de format personalitzat",
+    "DownloadClientsLoadError": "No es poden carregar els clients de baixada",
+    "IMDbId": "Identificador de TMDb",
+    "DisabledForLocalAddresses": "Desactivat per a adreces locals",
+    "RemoveFromDownloadClientHelpTextWarning": "L'eliminació esborrarà la baixada i els fitxers del client de baixada."
 }

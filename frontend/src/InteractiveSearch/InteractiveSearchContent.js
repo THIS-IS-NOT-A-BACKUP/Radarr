@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import Alert from 'Components/Alert';
 import Icon from 'Components/Icon';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import { icons, kinds, sortDirections } from 'Helpers/Props';
+import getErrorMessage from 'Utilities/Object/getErrorMessage';
 import translate from 'Utilities/String/translate';
 import InteractiveSearchRowConnector from './InteractiveSearchRowConnector';
 import styles from './InteractiveSearchContent.css';
@@ -32,7 +33,11 @@ const columns = [
   },
   {
     name: 'rejections',
-    label: React.createElement(Icon, { name: icons.DANGER }),
+    columnLabel: () => translate('Rejections'),
+    label: React.createElement(Icon, {
+      name: icons.DANGER,
+      title: () => translate('Rejections')
+    }),
     isSortable: true,
     fixedSortDirection: sortDirections.ASCENDING,
     isVisible: true
@@ -88,6 +93,7 @@ const columns = [
   },
   {
     name: 'customFormatScore',
+    columnLabel: () => translate('CustomFormatScore'),
     label: React.createElement(Icon, {
       name: icons.SCORE,
       title: () => translate('CustomFormatScore')
@@ -97,7 +103,11 @@ const columns = [
   },
   {
     name: 'indexerFlags',
-    label: React.createElement(Icon, { name: icons.FLAG }),
+    columnLabel: () => translate('IndexerFlags'),
+    label: React.createElement(Icon, {
+      name: icons.FLAG,
+      title: () => translate('IndexerFlags')
+    }),
     isSortable: true,
     isVisible: true
   }
@@ -119,36 +129,46 @@ function InteractiveSearchContent(props) {
     onGrabPress
   } = props;
 
+  const errorMessage = getErrorMessage(error);
+
   return (
     <div>
       {
-        isFetching &&
-          <LoadingIndicator />
+        isFetching ? <LoadingIndicator /> : null
       }
 
       {
-        !isFetching && !!error &&
+        !isFetching && error ?
           <Alert kind={kinds.DANGER} className={styles.alert}>
-            {translate('UnableToLoadResultsIntSearch')}
-          </Alert>
+            {
+              errorMessage ?
+                <Fragment>
+                  {translate('InteractiveSearchResultsFailedErrorMessage', { message: errorMessage.charAt(0).toLowerCase() + errorMessage.slice(1) })}
+                </Fragment> :
+                translate('MovieSearchResultsLoadError')
+            }
+          </Alert> :
+          null
       }
 
       {
-        !isFetching && isPopulated && !totalReleasesCount &&
+        !isFetching && isPopulated && !totalReleasesCount ?
           <Alert kind={kinds.INFO} className={styles.alert}>
             {translate('NoResultsFound')}
-          </Alert>
+          </Alert> :
+          null
       }
 
       {
-        !!totalReleasesCount && isPopulated && !items.length &&
+        !!totalReleasesCount && isPopulated && !items.length ?
           <Alert kind={kinds.WARNING} className={styles.alert}>
             {translate('AllResultsHiddenFilter')}
-          </Alert>
+          </Alert> :
+          null
       }
 
       {
-        isPopulated && !!items.length &&
+        isPopulated && !!items.length ?
           <Table
             columns={columns}
             sortKey={sortKey}
@@ -171,14 +191,16 @@ function InteractiveSearchContent(props) {
                 })
               }
             </TableBody>
-          </Table>
+          </Table> :
+          null
       }
 
       {
-        totalReleasesCount !== items.length && !!items.length &&
+        totalReleasesCount !== items.length && !!items.length ?
           <Alert kind={kinds.INFO} className={styles.alert}>
             {translate('SomeResultsHiddenFilter')}
-          </Alert>
+          </Alert> :
+          null
       }
     </div>
   );
