@@ -1,4 +1,6 @@
 import { createAction } from 'redux-actions';
+import createBulkEditItemHandler from 'Store/Actions/Creators/createBulkEditItemHandler';
+import createBulkRemoveItemHandler from 'Store/Actions/Creators/createBulkRemoveItemHandler';
 import createFetchHandler from 'Store/Actions/Creators/createFetchHandler';
 import createFetchSchemaHandler from 'Store/Actions/Creators/createFetchSchemaHandler';
 import createRemoveItemHandler from 'Store/Actions/Creators/createRemoveItemHandler';
@@ -11,8 +13,7 @@ import { createThunk } from 'Store/thunks';
 import getSectionState from 'Utilities/State/getSectionState';
 import selectProviderSchema from 'Utilities/State/selectProviderSchema';
 import updateSectionState from 'Utilities/State/updateSectionState';
-import createBulkEditItemHandler from '../Creators/createBulkEditItemHandler';
-import createBulkRemoveItemHandler from '../Creators/createBulkRemoveItemHandler';
+import translate from 'Utilities/String/translate';
 
 //
 // Variables
@@ -152,7 +153,7 @@ export default {
 
       // Set the name in pendingChanges
       newState.pendingChanges = {
-        name: `${item.name} - Copy`
+        name: translate('DefaultNameCopiedProfile', { name: item.name })
       };
 
       return updateSectionState(state, section, newState);
