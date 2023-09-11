@@ -108,7 +108,7 @@ namespace Radarr.Api.V3.Movies
         }
 
         [HttpGet]
-        public List<MovieResource> AllMovie(int? tmdbId)
+        public List<MovieResource> AllMovie(int? tmdbId, bool excludeLocalCovers = false)
         {
             var moviesResources = new List<MovieResource>();
 
@@ -135,7 +135,10 @@ namespace Radarr.Api.V3.Movies
 
                 var tdict = translations.ToDictionary(x => x.MovieMetadataId);
 
-                coverFileInfos = _coverMapper.GetCoverFileInfos();
+                if (!excludeLocalCovers)
+                {
+                    coverFileInfos = _coverMapper.GetCoverFileInfos();
+                }
 
                 var movies = movieTask.GetAwaiter().GetResult();
 
@@ -147,7 +150,10 @@ namespace Radarr.Api.V3.Movies
                     moviesResources.Add(movie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
                 }
 
-                MapCoversToLocal(moviesResources, coverFileInfos);
+                if (!excludeLocalCovers)
+                {
+                    MapCoversToLocal(moviesResources, coverFileInfos);
+                }
 
                 var rootFolders = _rootFolderService.All();
 
@@ -242,12 +248,8 @@ namespace Radarr.Api.V3.Movies
             var model = moviesResource.ToModel(movie);
 
             var updatedMovie = _moviesService.UpdateMovie(model);
-            var availDelay = _configService.AvailabilityDelay;
 
-            var translations = _movieTranslationService.GetAllTranslationsForMovieMetadata(movie.MovieMetadataId);
-            var translation = GetMovieTranslation(translations, movie.MovieMetadata, (Language)_configService.MovieInfoLanguage);
-
-            BroadcastResourceChange(ModelAction.Updated, updatedMovie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
+            BroadcastResourceChange(ModelAction.Updated, MapToResource(updatedMovie));
 
             return Accepted(moviesResource.Id);
         }
@@ -271,10 +273,7 @@ namespace Radarr.Api.V3.Movies
         [NonAction]
         public void Handle(MovieFileImportedEvent message)
         {
-            var availDelay = _configService.AvailabilityDelay;
-            var translations = _movieTranslationService.GetAllTranslationsForMovieMetadata(message.ImportedMovie.Movie.MovieMetadataId);
-            var translation = GetMovieTranslation(translations, message.ImportedMovie.Movie.MovieMetadata, (Language)_configService.MovieInfoLanguage);
-            BroadcastResourceChange(ModelAction.Updated, message.ImportedMovie.Movie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
+            BroadcastResourceChange(ModelAction.Updated, MapToResource(message.ImportedMovie.Movie));
         }
 
         [NonAction]
@@ -291,19 +290,13 @@ namespace Radarr.Api.V3.Movies
         [NonAction]
         public void Handle(MovieUpdatedEvent message)
         {
-            var availDelay = _configService.AvailabilityDelay;
-            var translations = _movieTranslationService.GetAllTranslationsForMovieMetadata(message.Movie.MovieMetadataId);
-            var translation = GetMovieTranslation(translations, message.Movie.MovieMetadata, (Language)_configService.MovieInfoLanguage);
-            BroadcastResourceChange(ModelAction.Updated, message.Movie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
+            BroadcastResourceChange(ModelAction.Updated, MapToResource(message.Movie));
         }
 
         [NonAction]
         public void Handle(MovieEditedEvent message)
         {
-            var availDelay = _configService.AvailabilityDelay;
-            var translations = _movieTranslationService.GetAllTranslationsForMovieMetadata(message.Movie.MovieMetadataId);
-            var translation = GetMovieTranslation(translations, message.Movie.MovieMetadata, (Language)_configService.MovieInfoLanguage);
-            BroadcastResourceChange(ModelAction.Updated, message.Movie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
+            BroadcastResourceChange(ModelAction.Updated, MapToResource(message.Movie));
         }
 
         [NonAction]
@@ -318,10 +311,7 @@ namespace Radarr.Api.V3.Movies
         [NonAction]
         public void Handle(MovieRenamedEvent message)
         {
-            var availDelay = _configService.AvailabilityDelay;
-            var translations = _movieTranslationService.GetAllTranslationsForMovieMetadata(message.Movie.MovieMetadataId);
-            var translation = GetMovieTranslation(translations, message.Movie.MovieMetadata, (Language)_configService.MovieInfoLanguage);
-            BroadcastResourceChange(ModelAction.Updated, message.Movie.ToResource(availDelay, translation, _qualityUpgradableSpecification));
+            BroadcastResourceChange(ModelAction.Updated, MapToResource(message.Movie));
         }
 
         [NonAction]
