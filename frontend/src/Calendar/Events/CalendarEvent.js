@@ -32,6 +32,7 @@ class CalendarEvent extends Component {
       queueItem,
       showMovieInformation,
       showCutoffUnmetIcon,
+      fullColorEvents,
       colorImpairedMode,
       date
     } = this.props;
@@ -56,64 +57,71 @@ class CalendarEvent extends Component {
     }
 
     return (
-      <div>
+      <div
+        className={classNames(
+          styles.event,
+          styles[statusStyle],
+          colorImpairedMode && 'colorImpaired',
+          fullColorEvents && 'fullColor'
+        )}
+      >
         <Link
-          className={classNames(
-            styles.event,
-            styles.link,
-            styles[statusStyle],
-            colorImpairedMode && 'colorImpaired'
-          )}
-          // component="div"
+          className={styles.underlay}
           to={link}
-        >
+        />
+
+        <div className={styles.overlay} >
           <div className={styles.info}>
             <div className={styles.movieTitle}>
               {title}
             </div>
 
-            {
-              !!queueItem &&
-                <span className={styles.statusIcon}>
-                  <CalendarEventQueueDetails
-                    {...queueItem}
-                  />
-                </span>
-            }
+            <div className={styles.statusContainer}>
+              {
+                queueItem ?
+                  <span className={styles.statusIcon}>
+                    <CalendarEventQueueDetails
+                      {...queueItem}
+                    />
+                  </span> :
+                  null
+              }
 
-            {
-              !queueItem && grabbed &&
-                <Icon
-                  className={styles.statusIcon}
-                  name={icons.DOWNLOADING}
-                  title={translate('MovieIsDownloading')}
-                />
-            }
+              {
+                !queueItem && grabbed ?
+                  <Icon
+                    className={styles.statusIcon}
+                    name={icons.DOWNLOADING}
+                    title={translate('MovieIsDownloading')}
+                  /> :
+                  null
+              }
 
-            {
-              showCutoffUnmetIcon &&
-              !!movieFile &&
-              movieFile.qualityCutoffNotMet &&
-                <Icon
-                  className={styles.statusIcon}
-                  name={icons.MOVIE_FILE}
-                  kind={kinds.WARNING}
-                  title={translate('QualityCutoffHasNotBeenMet')}
-                />
-            }
+              {
+                showCutoffUnmetIcon && !!movieFile && movieFile.qualityCutoffNotMet ?
+                  <Icon
+                    className={styles.statusIcon}
+                    name={icons.MOVIE_FILE}
+                    kind={kinds.WARNING}
+                    title={translate('QualityCutoffHasNotBeenMet')}
+                  /> :
+                  null
+              }
+            </div>
           </div>
 
           {
-            showMovieInformation &&
+            showMovieInformation ?
               <div className={styles.movieInfo}>
                 <div className={styles.genres}>
                   {joinedGenres}
                 </div>
-              </div>
+              </div> :
+              null
           }
 
           {
-            showMovieInformation &&
+            showMovieInformation ?
               <div className={styles.movieInfo}>
                 <div className={styles.genres}>
                   {eventType.join(', ')}
@@ -121,10 +129,10 @@ class CalendarEvent extends Component {
                 <div>
                   {certification}
                 </div>
-              </div>
+              </div> :
+              null
           }
-        </Link>
-
+        </div>
       </div>
     );
   }
@@ -147,6 +155,7 @@ CalendarEvent.propTypes = {
   queueItem: PropTypes.object,
   showMovieInformation: PropTypes.bool.isRequired,
   showCutoffUnmetIcon: PropTypes.bool.isRequired,
+  fullColorEvents: PropTypes.bool.isRequired,
   timeFormat: PropTypes.string.isRequired,
   colorImpairedMode: PropTypes.bool.isRequired,
   date: PropTypes.string.isRequired
