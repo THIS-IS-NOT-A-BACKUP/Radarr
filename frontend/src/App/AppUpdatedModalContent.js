@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
+import InlineMarkdown from 'Components/Markdown/InlineMarkdown';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
@@ -64,20 +65,20 @@ function AppUpdatedModalContent(props) {
   return (
     <ModalContent onModalClose={onModalClose}>
       <ModalHeader>
-        {translate('RadarrUpdated')}
+        {translate('AppUpdated', { appName: 'Radarr' })}
       </ModalHeader>
 
       <ModalBody>
-        <div dangerouslySetInnerHTML={{ __html: translate('VersionUpdateText', [`<span className=${styles.version}>${version}</span>`]) }} />
+        <div>
+          <InlineMarkdown data={translate('AppUpdatedVersion', { appName: 'Radarr', version })} blockClassName={styles.version} />
+        </div>
 
         {
           isPopulated && !error && !!update &&
             <div>
               {
                 !update.changes &&
-                  <div className={styles.maintenance}>
-                    {translate('MaintenanceRelease')}
-                  </div>
+                  <div className={styles.maintenance}>{translate('MaintenanceRelease')}</div>
               }
 
               {
