@@ -302,13 +302,13 @@ namespace NzbDrone.Core.Download.Clients.QBittorrent
                         break;
                 }
 
-                if (version >= new Version("2.6.1"))
+                if (version >= new Version("2.6.1") && item.Status == DownloadItemStatus.Completed)
                 {
                     if (torrent.ContentPath != torrent.SavePath)
                     {
                         item.OutputPath = _remotePathMappingService.RemapRemoteToLocal(Settings.Host, new OsPath(torrent.ContentPath));
                     }
-                    else if (item.Status == DownloadItemStatus.Completed)
+                    else
                     {
                         item.Status = DownloadItemStatus.Warning;
                         item.Message = "Unable to Import. Path matches client base download directory, it's possible 'Keep top-level folder' is disabled for this torrent or 'Torrent Content Layout' is NOT set to 'Original' or 'Create Subfolder'?";
@@ -384,11 +384,13 @@ namespace NzbDrone.Core.Download.Clients.QBittorrent
                 }
             }
 
+            var minimumRetention = 60 * 24 * 14;
+
             return new DownloadClientInfo
             {
                 IsLocalhost = Settings.Host == "127.0.0.1" || Settings.Host == "localhost",
                 OutputRootFolders = new List<OsPath> { _remotePathMappingService.RemapRemoteToLocal(Settings.Host, destDir) },
-                RemovesCompletedDownloads = (config.MaxRatioEnabled || config.MaxSeedingTimeEnabled) && (config.MaxRatioAction == QBittorrentMaxRatioAction.Remove || config.MaxRatioAction == QBittorrentMaxRatioAction.DeleteFiles)
+                RemovesCompletedDownloads = (config.MaxRatioEnabled || (config.MaxSeedingTimeEnabled && config.MaxSeedingTime < minimumRetention)) && (config.MaxRatioAction == QBittorrentMaxRatioAction.Remove || config.MaxRatioAction == QBittorrentMaxRatioAction.DeleteFiles)
             };
         }
 
