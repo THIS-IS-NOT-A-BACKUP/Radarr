@@ -3,40 +3,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import AppState from 'App/State/AppState';
 import FilterModal from 'Components/Filter/FilterModal';
-import { setCalendarFilter } from 'Store/Actions/calendarActions';
+import { setQueueFilter } from 'Store/Actions/queueActions';
 
-function createCalendarSelector() {
+function createQueueSelector() {
   return createSelector(
-    (state: AppState) => state.calendar.items,
-    (calendar) => {
-      return calendar;
+    (state: AppState) => state.queue.paged.items,
+    (queueItems) => {
+      return queueItems;
     }
   );
 }
 
 function createFilterBuilderPropsSelector() {
   return createSelector(
-    (state: AppState) => state.calendar.filterBuilderProps,
+    (state: AppState) => state.queue.paged.filterBuilderProps,
     (filterBuilderProps) => {
       return filterBuilderProps;
     }
   );
 }
 
-interface CalendarFilterModalProps {
+interface QueueFilterModalProps {
   isOpen: boolean;
 }
 
-export default function CalendarFilterModal(props: CalendarFilterModalProps) {
-  const sectionItems = useSelector(createCalendarSelector());
+export default function QueueFilterModal(props: QueueFilterModalProps) {
+  const sectionItems = useSelector(createQueueSelector());
   const filterBuilderProps = useSelector(createFilterBuilderPropsSelector());
-  const customFilterType = 'calendar';
+  const customFilterType = 'queue';
 
   const dispatch = useDispatch();
 
   const dispatchSetFilter = useCallback(
     (payload: unknown) => {
-      dispatch(setCalendarFilter(payload));
+      dispatch(setQueueFilter(payload));
     },
     [dispatch]
   );

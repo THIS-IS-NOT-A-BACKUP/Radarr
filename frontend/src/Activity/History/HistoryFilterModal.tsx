@@ -3,40 +3,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import AppState from 'App/State/AppState';
 import FilterModal from 'Components/Filter/FilterModal';
-import { setCalendarFilter } from 'Store/Actions/calendarActions';
+import { setHistoryFilter } from 'Store/Actions/historyActions';
 
-function createCalendarSelector() {
+function createHistorySelector() {
   return createSelector(
-    (state: AppState) => state.calendar.items,
-    (calendar) => {
-      return calendar;
+    (state: AppState) => state.history.items,
+    (queueItems) => {
+      return queueItems;
     }
   );
 }
 
 function createFilterBuilderPropsSelector() {
   return createSelector(
-    (state: AppState) => state.calendar.filterBuilderProps,
+    (state: AppState) => state.history.filterBuilderProps,
     (filterBuilderProps) => {
       return filterBuilderProps;
     }
   );
 }
 
-interface CalendarFilterModalProps {
+interface HistoryFilterModalProps {
   isOpen: boolean;
 }
 
-export default function CalendarFilterModal(props: CalendarFilterModalProps) {
-  const sectionItems = useSelector(createCalendarSelector());
+export default function HistoryFilterModal(props: HistoryFilterModalProps) {
+  const sectionItems = useSelector(createHistorySelector());
   const filterBuilderProps = useSelector(createFilterBuilderPropsSelector());
-  const customFilterType = 'calendar';
+  const customFilterType = 'history';
 
   const dispatch = useDispatch();
 
   const dispatchSetFilter = useCallback(
     (payload: unknown) => {
-      dispatch(setCalendarFilter(payload));
+      dispatch(setHistoryFilter(payload));
     },
     [dispatch]
   );
