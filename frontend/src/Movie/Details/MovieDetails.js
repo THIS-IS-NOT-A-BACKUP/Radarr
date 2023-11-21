@@ -37,8 +37,6 @@ import * as keyCodes from 'Utilities/Constants/keyCodes';
 import formatRuntime from 'Utilities/Date/formatRuntime';
 import formatBytes from 'Utilities/Number/formatBytes';
 import translate from 'Utilities/String/translate';
-import selectAll from 'Utilities/Table/selectAll';
-import toggleSelected from 'Utilities/Table/toggleSelected';
 import MovieCollectionLabelConnector from './../MovieCollectionLabelConnector';
 import MovieCastPostersConnector from './Credits/Cast/MovieCastPostersConnector';
 import MovieCrewPostersConnector from './Credits/Crew/MovieCrewPostersConnector';
@@ -56,14 +54,6 @@ function getFanartUrl(images) {
   return _.find(images, { coverType: 'fanart' })?.url;
 }
 
-function getExpandedState(newState) {
-  return {
-    allExpanded: newState.allSelected,
-    allCollapsed: newState.allUnselected,
-    expandedState: newState.selectedState
-  };
-}
-
 class MovieDetails extends Component {
 
   //
@@ -79,9 +69,6 @@ class MovieDetails extends Component {
       isInteractiveImportModalOpen: false,
       isInteractiveSearchModalOpen: false,
       isMovieHistoryModalOpen: false,
-      allExpanded: false,
-      allCollapsed: false,
-      expandedState: {},
       overviewHeight: 0,
       titleWidth: 0
     };
@@ -112,10 +99,6 @@ class MovieDetails extends Component {
 
   onOrganizeModalClose = () => {
     this.setState({ isOrganizeModalOpen: false });
-  };
-
-  onManageEpisodesPress = () => {
-    this.setState({ isManageEpisodesOpen: true });
   };
 
   onInteractiveImportPress = () => {
@@ -161,29 +144,6 @@ class MovieDetails extends Component {
     this.setState({ isMovieHistoryModalOpen: false });
   };
 
-  onExpandAllPress = () => {
-    const {
-      allExpanded,
-      expandedState
-    } = this.state;
-
-    this.setState(getExpandedState(selectAll(expandedState, !allExpanded)));
-  };
-
-  onExpandPress = (seasonNumber, isExpanded) => {
-    this.setState((state) => {
-      const convertedState = {
-        allSelected: state.allExpanded,
-        allUnselected: state.allCollapsed,
-        selectedState: state.expandedState
-      };
-
-      const newState = toggleSelected(convertedState, [], seasonNumber, isExpanded, false);
-
-      return getExpandedState(newState);
-    });
-  };
-
   onMeasure = ({ height }) => {
     this.setState({ overviewHeight: height });
   };
@@ -220,7 +180,12 @@ class MovieDetails extends Component {
     if (
       touchStart < 50 ||
       this.props.isSidebarVisible ||
-      this.state.isEventModalOpen
+      this.state.isOrganizeModalOpen ||
+      this.state.isEditMovieModalOpen ||
+      this.state.isDeleteMovieModalOpen ||
+      this.state.isInteractiveImportModalOpen ||
+      this.state.isInteractiveSearchModalOpen ||
+      this.state.isMovieHistoryModalOpen
     ) {
       return;
     }
@@ -253,10 +218,6 @@ class MovieDetails extends Component {
     if (!this._touchStart) {
       return;
     }
-  };
-
-  onTabSelect = (index, lastIndex) => {
-    this.setState({ selectedTabIndex: index });
   };
 
   //
@@ -367,7 +328,6 @@ class MovieDetails extends Component {
             <PageToolbarButton
               label={translate('History')}
               iconName={icons.HISTORY}
-              isDisabled={!hasMovieFiles}
               onPress={this.onMovieHistoryPress}
             />
 
