@@ -14,24 +14,6 @@ import 'swiper/css/navigation';
 const columnPadding = parseInt(dimensions.movieIndexColumnPadding);
 const columnPaddingSmallScreen = parseInt(dimensions.movieIndexColumnPaddingSmallScreen);
 
-const additionalColumnCount = {
-  small: 3,
-  medium: 2,
-  large: 1
-};
-
-function calculateColumnWidth(width, posterSize, isSmallScreen) {
-  const maxiumColumnWidth = isSmallScreen ? 172 : 182;
-  const columns = Math.floor(width / maxiumColumnWidth);
-  const remainder = width % maxiumColumnWidth;
-
-  if (remainder === 0 && posterSize === 'large') {
-    return maxiumColumnWidth;
-  }
-
-  return Math.floor(width / (columns + additionalColumnCount[posterSize]));
-}
-
 function calculateRowHeight(posterHeight, isSmallScreen) {
   const titleHeight = 19;
   const characterHeight = 19;
@@ -44,10 +26,6 @@ function calculateRowHeight(posterHeight, isSmallScreen) {
   ];
 
   return heights.reduce((acc, height) => acc + height, 0);
-}
-
-function calculatePosterHeight(posterWidth) {
-  return Math.ceil((250 / 170) * posterWidth);
 }
 
 class MovieCreditPosters extends Component {
@@ -66,31 +44,7 @@ class MovieCreditPosters extends Component {
       posterHeight: 238,
       rowHeight: calculateRowHeight(238, props.isSmallScreen)
     };
-
-    this._isInitialized = false;
   }
-
-  //
-  // Control
-
-  calculateGrid = (width = this.state.width, isSmallScreen) => {
-
-    const padding = isSmallScreen ? columnPaddingSmallScreen : columnPadding;
-    const columnWidth = calculateColumnWidth(width, 'small', isSmallScreen);
-    const columnCount = Math.max(Math.floor(width / columnWidth), 1);
-    const posterWidth = columnWidth - padding;
-    const posterHeight = calculatePosterHeight(posterWidth);
-    const rowHeight = calculateRowHeight(posterHeight, isSmallScreen);
-
-    this.setState({
-      width,
-      columnWidth,
-      columnCount,
-      posterWidth,
-      posterHeight,
-      rowHeight
-    });
-  };
 
   //
   // Render
@@ -114,13 +68,12 @@ class MovieCreditPosters extends Component {
           slidesPerView='auto'
           spaceBetween={10}
           slidesPerGroup={3}
+          navigation={true}
           loop={false}
           loopFillGroupWithBlank={true}
           className="mySwiper"
           modules={[Navigation]}
           onInit={(swiper) => {
-            swiper.params.navigation.prevEl = this._swiperPrevRef;
-            swiper.params.navigation.nextEl = this._swiperNextRef;
             swiper.navigation.init();
             swiper.navigation.update();
           }}
