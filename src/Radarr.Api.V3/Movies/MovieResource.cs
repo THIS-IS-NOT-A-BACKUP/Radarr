@@ -47,9 +47,10 @@ namespace Radarr.Api.V3.Movies
         // public bool Downloaded { get; set; }
         public string RemotePoster { get; set; }
         public int Year { get; set; }
-        public bool HasFile { get; set; }
         public string YouTubeTrailerId { get; set; }
         public string Studio { get; set; }
+
+        public bool HasFile { get; set; }
 
         // View & Edit
         public string Path { get; set; }
@@ -77,6 +78,7 @@ namespace Radarr.Api.V3.Movies
         public MovieFileResource MovieFile { get; set; }
         public MovieCollectionResource Collection { get; set; }
         public float Popularity { get; set; }
+        public MovieStatisticsResource Statistics { get; set; }
     }
 
     public static class MovieResourceMapper

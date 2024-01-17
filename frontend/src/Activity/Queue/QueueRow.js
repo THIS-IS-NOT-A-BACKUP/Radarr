@@ -4,7 +4,7 @@ import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import IconButton from 'Components/Link/IconButton';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import ProgressBar from 'Components/ProgressBar';
-// import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
 import TableRow from 'Components/Table/TableRow';
@@ -97,6 +97,7 @@ class QueueRow extends Component {
       outputPath,
       downloadClient,
       estimatedCompletionTime,
+      added,
       timeleft,
       size,
       sizeleft,
@@ -315,6 +316,15 @@ class QueueRow extends Component {
               );
             }
 
+            if (name === 'added') {
+              return (
+                <RelativeDateCellConnector
+                  key={name}
+                  date={added}
+                />
+              );
+            }
+
             if (name === 'actions') {
               return (
                 <TableRowCell
@@ -393,6 +403,7 @@ QueueRow.propTypes = {
   outputPath: PropTypes.string,
   downloadClient: PropTypes.string,
   estimatedCompletionTime: PropTypes.string,
+  added: PropTypes.string,
   timeleft: PropTypes.string,
   size: PropTypes.number,
   year: PropTypes.number,
