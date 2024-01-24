@@ -311,7 +311,7 @@
     "DeleteCustomFormat": "Cancella Formato Personalizzato",
     "DeleteBackup": "Cancella Backup",
     "DelayProfile": "Profilo di Ritardo",
-    "DBMigration": "Migrazione DB",
+    "DatabaseMigration": "Migrazione DB",
     "CutoffHelpText": "Una volta raggiunta questa qualità, {appName} non scaricherà più film",
     "CutoffFormatScoreHelpText": "Una volta raggiunto questo formato personalizzato, {appName} non scaricherà più i film",
     "CustomFormatsSettings": "Formati Personalizzati Impostazioni",
@@ -1106,5 +1106,7 @@
     "AddRootFolderError": "Impossibile aggiungere cartella radice",
     "AppUpdated": "{appName} Aggiornato",
     "AuthenticationRequiredWarning": "Per prevenire accessi remoti non autorizzati, {appName} da ora richiede che l'autenticazione sia abilitata. Opzionalmente puoi disabilitare l'autenticazione per gli indirizzi di rete locali.",
-    "CustomFormatJson": "Formato Personalizzato JSON"
+    "CustomFormatJson": "Formato Personalizzato JSON",
+    "AddImportListImplementation": "Aggiungi lista di importazione - {implementationName}",
+    "AutoRedownloadFailed": "Download fallito"
 }
