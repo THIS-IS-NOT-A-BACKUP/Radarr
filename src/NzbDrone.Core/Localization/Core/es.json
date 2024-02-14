@@ -370,7 +370,7 @@
     "AllowHardcodedSubsHelpText": "Hardcoded subs que sean detectados serán automáticamente descargados",
     "AllowHardcodedSubs": "Permitir Hardcoded Subs",
     "AgeWhenGrabbed": "Antigüedad (cuando se añadió)",
-    "AddImportExclusionHelpText": "Prevenir que la película sea añadida a {appName} mediante listas",
+    "AddListExclusionMovieHelpText": "Prevenir que la película sea añadida a {appName} mediante listas",
     "AddImportListExclusion": "Agregar Lista de Exclusión",
     "YesCancel": "Sí, Cancelar",
     "WhitelistedSubtitleTags": "Etiquetas de Subtítulos Permitidas",
@@ -1060,7 +1060,7 @@
     "ShowCinemaReleaseHelpText": "Mostrar la fecha de lanzamiento debajo del cartel",
     "DeleteRemotePathMapping": "Borrar mapeo de ruta remota",
     "DownloadClientMovieTagHelpText": "Solo utilizar este indexador para películas que coincidan con al menos una etiqueta. Déjelo en blanco para utilizarlo con todas las películas.",
-    "DeleteCustomFormatMessageText": "¿Estás seguro de que quieres eliminar el formato personalizado '{customFormatName}'?",
+    "DeleteCustomFormatMessageText": "¿Estás seguro de que quieres eliminar el formato personalizado '{name}'?",
     "DeleteDelayProfileMessageText": "¿Está seguro de que desea borrar este perfil de retraso?",
     "DeleteConditionMessageText": "Seguro que quieres eliminar la etiqueta '{name}'?",
     "DeleteFormatMessageText": "¿Está seguro de que desea eliminar la etiqueta de formato {0}?",
@@ -1276,5 +1276,6 @@
     "NotificationsEmailSettingsUseEncryptionHelpText": "Si prefiere utilizar el cifrado si está configurado en el servidor, utilizar siempre el cifrado mediante SSL (sólo puerto 465) o StartTLS (cualquier otro puerto) o no utilizar nunca el cifrado",
     "DownloadClientQbittorrentValidationRemovesAtRatioLimitDetail": "{appName} no podrá efectuar el Manejo de Descargas Completadas según lo configurado. Puede arreglar esto en qBittorrent ('Herramientas -> Opciones...' en el menú) cambiando 'Opciones -> BitTorrent -> Límite de ratio ' de 'Eliminarlas' a 'Pausarlas'",
     "ListQualityProfileHelpText": "Los elementos de la lista del Perfil de Calidad se añadirán con",
-    "ListRootFolderHelpText": "Los elementos de la lista de carpetas raíz se añadirán a"
+    "ListRootFolderHelpText": "Los elementos de la lista de carpetas raíz se añadirán a",
+    "BlackholeFolderHelpText": "La carpeta en donde {appName} se almacenaran los {extension} file"
 }

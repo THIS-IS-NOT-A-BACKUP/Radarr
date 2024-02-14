@@ -397,7 +397,7 @@
     "CertificationCountry": "Pays de classification",
     "BackupFolderHelpText": "Les chemins relatifs pointeront sous le repertoire AppData de {appName}",
     "AvailabilityDelayHelpText": "Temps à laisser s’écouler (avant ou après la date de disponibilité) avant de chercher le film",
-    "AddImportExclusionHelpText": "Empêcher {appName} d'ajouter le film automatiquement via une liste",
+    "AddListExclusionMovieHelpText": "Empêcher {appName} d'ajouter le film automatiquement via une liste",
     "ImportExtraFilesMovieHelpText": "Importer les fichiers extra correspondants (sous-titres, .nfo etc.) après avoir importé un fichier film",
     "ImportExtraFiles": "Importer des fichiers supplémentaires",
     "ImportedTo": "Importé vers",
@@ -1086,7 +1086,7 @@
     "RemoveSelectedItemQueueMessageText": "Êtes-vous sûr de vouloir supprimer 1 élément de la file d'attente ?",
     "CountIndexersSelected": "{count} indexeur(s) sélectionné(s)",
     "DeleteConditionMessageText": "Voulez-vous vraiment supprimer la condition « {name} » ?",
-    "DeleteCustomFormatMessageText": "Voulez-vous vraiment supprimer le format personnalisé « {customFormatName} » ?",
+    "DeleteCustomFormatMessageText": "Voulez-vous vraiment supprimer le format personnalisé « {name} » ?",
     "DeleteDelayProfileMessageText": "Êtes-vous sûr de vouloir supprimer ce profil de retard ?",
     "ResetAPIKeyMessageText": "Êtes-vous sûr de vouloir réinitialiser votre clé API ?",
     "ResetDefinitionTitlesHelpText": "Réinitialiser les titres de définition ainsi que les valeurs",
@@ -1516,5 +1516,6 @@
     "IndexerSettingsRejectBlocklistedTorrentHashesHelpText": "Si un torrent est bloqué par le hachage, il peut ne pas être correctement rejeté pendant le RSS/recherche pour certains indexeurs. L'activation de cette fonction permet de le rejeter après que le torrent a été saisi, mais avant qu'il ne soit envoyé au client.",
     "RemoveQueueItemsRemovalMethodHelpTextWarning": "Supprimer du client de téléchargement\" supprimera les téléchargements et les fichiers du client de téléchargement.",
     "DownloadClientAriaSettingsDirectoryHelpText": "Emplacement facultatif pour les téléchargements, laisser vide pour utiliser l'emplacement par défaut Aria2",
-    "RemoveFromDownloadClientHint": "Supprime le téléchargement et le(s) fichier(s) du client de téléchargement"
+    "RemoveFromDownloadClientHint": "Supprime le téléchargement et le(s) fichier(s) du client de téléchargement",
+    "AddAutoTagError": "Impossible d'ajouter un nouveau tag automatique, veuillez réessayer."
 }
