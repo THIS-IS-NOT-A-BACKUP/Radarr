@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DryIoc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -27,6 +28,7 @@ using NzbDrone.SignalR;
 using Radarr.Api.V3.System;
 using Radarr.Http;
 using Radarr.Http.Authentication;
+using Radarr.Http.ClientSchema;
 using Radarr.Http.ErrorManagement;
 using Radarr.Http.Frontend;
 using Radarr.Http.Middleware;
@@ -57,7 +59,7 @@ namespace NzbDrone.Host
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
                 options.KnownNetworks.Clear();
                 options.KnownProxies.Clear();
             });
@@ -209,6 +211,7 @@ namespace NzbDrone.Host
         }
 
         public void Configure(IApplicationBuilder app,
+                              IContainer container,
                               IStartupContext startupContext,
                               Lazy<IMainDatabase> mainDatabaseFactory,
                               Lazy<ILogDatabase> logDatabaseFactory,
@@ -239,6 +242,7 @@ namespace NzbDrone.Host
             _ = logDatabaseFactory.Value;
 
             dbTarget.Register();
+            SchemaBuilder.Initialize(container);
 
             if (OsInfo.IsNotWindows)
             {
