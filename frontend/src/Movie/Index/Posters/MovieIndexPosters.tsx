@@ -148,6 +148,7 @@ export default function MovieIndexPosters(props: MovieIndexPostersProps) {
       showTmdbRating,
       showImdbRating,
       showRottenTomatoesRating,
+      showTags,
     } = posterOptions;
 
     const nextAiringHeight = 19;
@@ -191,6 +192,10 @@ export default function MovieIndexPosters(props: MovieIndexPostersProps) {
       heights.push(19);
     }
 
+    if (showTags) {
+      heights.push(21);
+    }
+
     switch (sortKey) {
       case 'studio':
       case 'added':
@@ -230,6 +235,11 @@ export default function MovieIndexPosters(props: MovieIndexPostersProps) {
       case 'rottenTomatoesRating':
         if (!showRottenTomatoesRating) {
           heights.push(19);
+        }
+        break;
+      case 'tags':
+        if (!showTags) {
+          heights.push(21);
         }
         break;
       default:
