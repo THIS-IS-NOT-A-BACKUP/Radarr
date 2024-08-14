@@ -1009,7 +1009,7 @@
     "RemoveSelectedItem": "Видалити вибраний елемент",
     "RemotePathMappingHostHelpText": "Той самий хост, який ви вказали для віддаленого клієнта завантаження",
     "ShowGenres": "Показати жанри",
-    "UpdateAvailable": "Доступне нове оновлення",
+    "UpdateAvailableHealthCheckMessage": "Доступне нове оновлення",
     "Updates": "Оновлення",
     "Monitor": "Контрольований",
     "MonitorCollection": "Контрольовані Колекції",
@@ -1280,5 +1280,6 @@
     "AutoRedownloadFailedFromInteractiveSearchHelpText": "Автоматично шукати та намагатися завантажити інший реліз, якщо обраний реліз не вдалось завантажити з інтерактивного пошуку.",
     "ChangeCategoryHint": "Змінює завантаження на «Категорію після імпорту» з клієнта завантажувача",
     "ReleaseProfiles": "профіль релізу",
-    "Any": "Будь-який"
+    "Any": "Будь-який",
+    "DeleteSelectedImportListExclusionsMessageText": "Ви впевнені, що хочете видалити це виключення зі списку імпорту?"
 }

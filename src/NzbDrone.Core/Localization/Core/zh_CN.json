@@ -984,7 +984,7 @@
     "RemotePathMappingCheckFileRemoved": "文件{path} 在处理的过程中被部分删除。",
     "RemotePathMappingCheckFilesGenericPermissions": "下载{1}中客户端{0}报告的文件，但{appName}无法看到此目录。您可能需要调整文件夹的权限。",
     "RemotePathMappingCheckGenericPermissions": "下载客户端{downloadClientName}将下载放置在{path}中，但 {appName} 无法看到此目录。您可能需要调整文件夹的权限。",
-    "UpdateAvailable": "有新的更新可用",
+    "UpdateAvailableHealthCheckMessage": "有新的更新可用",
     "Letterboxd": "Letterboxd",
     "RemoveSelectedItem": "删除所选项目",
     "RemoveSelectedItems": "删除所选项目",
@@ -1667,5 +1667,7 @@
     "DeleteMovieFoldersHelpText": "删除剧集文件夹及其所含文件",
     "DeleteSelectedMovies": "删除选中的剧集",
     "NotificationsPlexSettingsServer": "服务器",
-    "Any": "任何"
+    "Any": "任何",
+    "DeleteSelected": "删除所选项",
+    "DeleteSelectedImportListExclusionsMessageText": "你确定要删除这个导入排除列表吗？"
 }

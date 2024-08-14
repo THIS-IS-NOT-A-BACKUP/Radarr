@@ -1059,7 +1059,7 @@
     "TaskUserAgentTooltip": "User-Agent που παρέχεται από την εφαρμογή που κάλεσε το API",
     "TotalMovies": "Σύνολο ταινιών",
     "Waiting": "Αναμονή",
-    "UpdateAvailable": "Νέα ενημέρωση είναι διαθέσιμη",
+    "UpdateAvailableHealthCheckMessage": "Νέα ενημέρωση είναι διαθέσιμη",
     "SizeLimit": "Όριο μεγέθους",
     "File": "Αρχεία",
     "EditMovies": "Επεξεργασία ταινίας",
@@ -1224,5 +1224,7 @@
     "MovieFileDeletedTooltip": "Διαγραφή αρχείου ταινίας",
     "DeleteMovieFolders": "Διαγραφή φακέλου ταινίας",
     "DeleteMovieFoldersHelpText": "Διαγράψτε το φάκελο της ταινίας και τα περιεχόμενά του",
-    "DeleteSelectedMovies": "Διαγραφή επιλεγμένων αρχείων ταινιών"
+    "DeleteSelectedMovies": "Διαγραφή επιλεγμένων αρχείων ταινιών",
+    "DeleteSelected": "Διαγραφή επιλεγμένων",
+    "DeleteSelectedImportListExclusionsMessageText": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την εξαίρεση λίστας εισαγωγής;"
 }

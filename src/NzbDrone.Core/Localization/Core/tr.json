@@ -1682,7 +1682,7 @@
     "TaskUserAgentTooltip": "API'yi çağıran uygulama tarafından sağlanan Kullanıcı Aracısı",
     "TmdbVotes": "TMDb Oyları",
     "SizeLimit": "Boyut Limiti",
-    "UpdateAvailable": "Yeni güncelleme mevcut",
+    "UpdateAvailableHealthCheckMessage": "Yeni güncelleme mevcut",
     "RemoveCompletedDownloads": "Tamamlanan İndirmeleri Kaldır",
     "RemoveSelectedItemQueueMessageText": "1 öğeyi kuyruktan kaldırmak istediğinizden emin misiniz?",
     "ResetQualityDefinitions": "Kalite Tanımlarını Sıfırla",
@@ -1790,5 +1790,9 @@
     "DeleteMovieFolderMovieCount": "{size} boyutunda {movieFileCount} film dosyası",
     "NotificationsPlexSettingsServer": "Sunucu",
     "NotificationsPlexSettingsServerHelpText": "Kimlik doğrulamasından sonra plex.tv hesabından sunucuyu seçin",
-    "UnableToImportAutomatically": "Otomatikman İçe Aktarılamıyor"
+    "UnableToImportAutomatically": "Otomatikman İçe Aktarılamıyor",
+    "ShowTags": "Etiketleri göster",
+    "ShowTagsHelpText": "Etiketleri posterin altında göster",
+    "Any": "Herhangi",
+    "DeleteSelectedImportListExclusionsMessageText": "Bu içe aktarma listesi hariç tutma işlemini silmek istediğinizden emin misiniz?"
 }

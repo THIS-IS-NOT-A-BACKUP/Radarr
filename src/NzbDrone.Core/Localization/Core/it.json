@@ -982,7 +982,7 @@
     "RemoveSelectedItem": "Rimuovi elemento selezionato",
     "RemoveSelectedItems": "Rimuovi elementi selezionati",
     "TaskUserAgentTooltip": "User-Agent esposto dalla app che ha chiamato la API",
-    "UpdateAvailable": "É disponibile un nuovo aggiornamento",
+    "UpdateAvailableHealthCheckMessage": "É disponibile un nuovo aggiornamento",
     "BypassDelayIfHighestQualityHelpText": "Evita il ritardo quando la release ha la qualità massima abilitata nel profilo qualità con il protocollo preferito",
     "NotificationTriggersHelpText": "Seleziona quali eventi attiveranno questa notifica",
     "Filters": "Filtri",
@@ -1452,5 +1452,7 @@
     "SearchForCutoffUnmetMoviesConfirmationCount": "Sei sicuro di volere cercare tutti i {totalRecords} film mancanti?",
     "Release": "release",
     "IndexerDownloadClientHealthCheckMessage": "Indicizzatori con client di download non validi: {indexerNames}.",
-    "Any": "Qualunque"
+    "Any": "Qualunque",
+    "DeleteSelected": "Elimina Selezionati",
+    "DeleteSelectedImportListExclusionsMessageText": "Sei sicuro di voler cancellare questa lista di esclusioni delle importazioni?"
 }
