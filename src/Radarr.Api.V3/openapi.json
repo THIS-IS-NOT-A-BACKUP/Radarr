@@ -1283,6 +1283,26 @@
       }
     },
     "/api/v3/customformat": {
+      "get": {
+        "tags": [
+          "CustomFormat"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomFormatResource"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "CustomFormat"
@@ -1313,26 +1333,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CustomFormatResource"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "CustomFormat"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CustomFormatResource"
-                  }
                 }
               }
             }
@@ -1443,6 +1443,53 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v3/customformat/bulk": {
+      "put": {
+        "tags": [
+          "CustomFormat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFormatBulkResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomFormatResource"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CustomFormat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFormatBulkResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -4914,17 +4961,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MovieResource"
-                }
-              },
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MovieResource"
-                }
-              },
-              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MovieResource"
                 }
@@ -4970,17 +5007,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MovieResource"
-                }
-              },
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MovieResource"
-                }
-              },
-              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MovieResource"
                 }
@@ -8794,6 +8821,25 @@
               "type": "object",
               "additionalProperties": { }
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomFormatBulkResource": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "includeCustomFormatWhenRenaming": {
+            "type": "boolean",
             "nullable": true
           }
         },
