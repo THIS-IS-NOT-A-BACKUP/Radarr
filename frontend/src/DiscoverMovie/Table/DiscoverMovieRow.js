@@ -6,7 +6,7 @@ import ImportListListConnector from 'Components/ImportListListConnector';
 import IconButton from 'Components/Link/IconButton';
 import Link from 'Components/Link/Link';
 import RottenTomatoRating from 'Components/RottenTomatoRating';
-import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
+import RelativeDateCell from 'Components/Table/Cells/RelativeDateCell';
 import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
 import VirtualTableSelectCell from 'Components/Table/Cells/VirtualTableSelectCell';
 import TmdbRating from 'Components/TmdbRating';
@@ -198,10 +198,11 @@ class DiscoverMovieRow extends Component {
 
             if (name === 'inCinemas') {
               return (
-                <RelativeDateCellConnector
+                <RelativeDateCell
                   key={name}
                   className={styles[name]}
                   date={inCinemas}
+                  timeForToday={false}
                   component={VirtualTableRowCell}
                 />
               );
@@ -209,10 +210,11 @@ class DiscoverMovieRow extends Component {
 
             if (name === 'physicalRelease') {
               return (
-                <RelativeDateCellConnector
+                <RelativeDateCell
                   key={name}
                   className={styles[name]}
                   date={physicalRelease}
+                  timeForToday={false}
                   component={VirtualTableRowCell}
                 />
               );
@@ -220,10 +222,11 @@ class DiscoverMovieRow extends Component {
 
             if (name === 'digitalRelease') {
               return (
-                <RelativeDateCellConnector
+                <RelativeDateCell
                   key={name}
                   className={styles[name]}
                   date={digitalRelease}
+                  timeForToday={false}
                   component={VirtualTableRowCell}
                 />
               );
