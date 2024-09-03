@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import BlocklistConnector from 'Activity/Blocklist/BlocklistConnector';
+import Blocklist from 'Activity/Blocklist/Blocklist';
 import HistoryConnector from 'Activity/History/HistoryConnector';
-import QueueConnector from 'Activity/Queue/QueueConnector';
+import Queue from 'Activity/Queue/Queue';
 import AddNewMovieConnector from 'AddMovie/AddNewMovie/AddNewMovieConnector';
 import ImportMovies from 'AddMovie/ImportMovie/ImportMovies';
 import CalendarPageConnector from 'Calendar/CalendarPageConnector';
@@ -115,12 +115,12 @@ function AppRoutes(props) {
 
       <Route
         path="/activity/queue"
-        component={QueueConnector}
+        component={Queue}
       />
 
       <Route
         path="/activity/blocklist"
-        component={BlocklistConnector}
+        component={Blocklist}
       />
 
       {/*
