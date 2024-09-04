@@ -503,7 +503,7 @@
     "NoLimitForAnyRuntime": "No hay límites para ningún tiempo de ejecución",
     "NoLeaveIt": "No, déjalo",
     "New": "Nuevo",
-    "NetCore": ".NET",
+    "DotNetVersion": ".NET",
     "NamingSettings": "Opciones de nombrado",
     "MustNotContain": "No debe contener",
     "MustContain": "Debe contener",
@@ -1030,7 +1030,7 @@
     "MonitorCollection": "Monitorear Colección",
     "MonitoredCollectionHelpText": "Monitorear para que las películas de esta colección se añadan automáticamente a la biblioteca",
     "MovieAndCollection": "Película y Colección",
-    "MovieCollectionMultipleMissingRoots": "Múltiples carpetas raices faltantes para colecciones de películas: {0}",
+    "MovieCollectionFolderMultipleMissingRootsHealthCheckMessage": "Múltiples carpetas raices faltantes para colecciones de películas: {rootFoldersInfo}",
     "OnMovieAdded": "Al Agregar Pelicula",
     "RefreshCollections": "Actualizar Colecciones",
     "ShowCollectionDetails": "Mostrar Estado De Colección",
@@ -1040,7 +1040,7 @@
     "ScrollMovies": "Desplazar Películas",
     "ShowPosters": "Mostrar Posters",
     "UnableToLoadCollections": "No se han podido cargar las colecciones",
-    "MovieCollectionMissingRoot": "Carpeta raíz faltante para colección de películas: {0}",
+    "MovieCollectionRootFolderMissingRootHealthCheckMessage": "Carpeta raíz faltante para colección de películas: {rootFolderInfo}",
     "MovieOnly": "Solo Película",
     "Database": "Base de datos",
     "File": "Archivo",
@@ -1815,5 +1815,9 @@
     "TomorrowAt": "Mañana a las {time}",
     "YesterdayAt": "Ayer a las {time}",
     "DayOfWeekAt": "{day} a las {time}",
-    "Disposition": "Disposición"
+    "Disposition": "Disposición",
+    "CustomFormatsSpecificationExceptLanguage": "Excepto idioma",
+    "CustomFormatsSpecificationExceptLanguageHelpText": "Coincide si cualquier idioma distinto del seleccionado está presente",
+    "Logout": "Cerrar Sesión",
+    "NoBlocklistItems": "Ningún elemento en la lista de bloqueo"
 }

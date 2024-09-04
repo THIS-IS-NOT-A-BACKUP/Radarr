@@ -476,7 +476,7 @@
     "NoChange": "Nincs változás",
     "NoBackupsAreAvailable": "Nincsenek biztonsági mentések",
     "New": "Új",
-    "NetCore": ".NET",
+    "DotNetVersion": ".NET",
     "NegateHelpText": "Ha be van jelölve, az egyéni formátum nem lesz érvényes, ha ez a(z) {0} feltétel megegyezik.",
     "NamingSettings": "Elnevezési beállítások",
     "Name": "Név",
@@ -1028,10 +1028,10 @@
     "NoCollections": "Nem találhatóak filmek, kezdésnek adjon hozzá egy új filmet vagy importáljon már meglévőket",
     "InstanceName": "Példány Neve",
     "EditCollection": "Gyűjtemény módosítása",
-    "MovieCollectionMissingRoot": "Hiányzó gyökérmappa a filmgyűjteményhez: {0}",
+    "MovieCollectionRootFolderMissingRootHealthCheckMessage": "Hiányzó gyökérmappa a filmgyűjteményhez: {rootFolderInfo}",
     "ChooseImportMode": "Válassza az Importálási módot",
     "MovieAndCollection": "Film(ek) és Gyűjtemény(ek)",
-    "MovieCollectionMultipleMissingRoots": "Több gyökérmappa hiányzik a filmgyűjteményekhez: {0}",
+    "MovieCollectionFolderMultipleMissingRootsHealthCheckMessage": "Több gyökérmappa hiányzik a filmgyűjteményekhez: {rootFoldersInfo}",
     "MovieOnly": "Csak Film(ek)",
     "RefreshCollections": "Gyűjtemények frissítése",
     "ScrollMovies": "Filmek görgetése",
@@ -1441,5 +1441,6 @@
     "ShowDigitalRelease": "A mozi megjelenésének dátuma",
     "ShowDigitalReleaseHelpText": "Mutasd a megjelenés dátumát a poszter alatt",
     "ShowPhysicalRelease": "Fizikai megjelenés dátuma",
-    "ShowPhysicalReleaseHelpText": "Mutasd a megjelenés dátumát a poszter alatt"
+    "ShowPhysicalReleaseHelpText": "Mutasd a megjelenés dátumát a poszter alatt",
+    "Logout": "Kijelentkezés"
 }

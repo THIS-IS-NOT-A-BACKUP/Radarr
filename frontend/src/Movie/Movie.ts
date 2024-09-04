@@ -9,8 +9,10 @@ export type MovieStatus =
   | 'released'
   | 'deleted';
 
+export type CoverType = 'poster' | 'fanart';
+
 export interface Image {
-  coverType: string;
+  coverType: CoverType;
   url: string;
   remoteUrl: string;
 }
@@ -39,10 +41,10 @@ export interface Ratings {
 
 interface Movie extends ModelBase {
   tmdbId: number;
-  imdbId: string;
+  imdbId?: string;
   sortTitle: string;
   overview: string;
-  youTubeTrailerId: string;
+  youTubeTrailerId?: string;
   monitored: boolean;
   status: MovieStatus;
   title: string;

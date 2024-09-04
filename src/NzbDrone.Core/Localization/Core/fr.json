@@ -715,7 +715,7 @@
     "NoHistory": "Aucun historique",
     "NoBackupsAreAvailable": "Aucune sauvegarde n'est disponible",
     "New": "Nouveau",
-    "NetCore": ".NET",
+    "DotNetVersion": ".NET",
     "NamingSettings": "Paramètres de dénomination",
     "MustNotContain": "Ne doit pas contenir",
     "MovieYearToExcludeHelpText": "L'année de film à exclure",
@@ -1034,11 +1034,11 @@
     "CollectionShowOverviewsHelpText": "Afficher les aperçus des collections",
     "MovieAndCollection": "Film et collection",
     "ShowOverview": "Afficher l'aperçu",
-    "MovieCollectionMissingRoot": "Dossier racine manquant pour la collection de films : {0}",
+    "MovieCollectionRootFolderMissingRootHealthCheckMessage": "Dossier racine manquant pour la collection de films : {rootFolderInfo}",
     "OnMovieAdded": "À l'ajout d'un film",
     "MonitorCollection": "Surveiller la collection",
     "MonitoredCollectionHelpText": "Surveiller pour ajouter automatiquement les films de cette collection à la bibliothèque",
-    "MovieCollectionMultipleMissingRoots": "Plusieurs dossiers racine manquent pour les collections de films : {0}",
+    "MovieCollectionFolderMultipleMissingRootsHealthCheckMessage": "Plusieurs dossiers racine manquent pour les collections de films : {rootFoldersInfo}",
     "MovieOnly": "Film seulement",
     "RefreshCollections": "Actualiser les collections",
     "SearchOnAddCollectionHelpText": "Rechercher des films dans cette collection lorsqu'ils sont ajoutés à la bibliothèque",
@@ -1814,5 +1814,7 @@
     "DayOfWeekAt": "{day} à {time}",
     "TodayAt": "Aujourd'hui à {time}",
     "TomorrowAt": "Demain à {time}",
-    "YesterdayAt": "Hier à {time}"
+    "YesterdayAt": "Hier à {time}",
+    "Logout": "Se déconnecter",
+    "NoBlocklistItems": "Aucun élément de la liste de blocage"
 }
