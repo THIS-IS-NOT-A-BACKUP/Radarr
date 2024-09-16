@@ -387,7 +387,7 @@
     "Uptime": "Tiempo de actividad",
     "UpgradesAllowedHelpText": "Si se deshabilita las calidades no serán actualizadas",
     "UpdateScriptPathHelpText": "Ruta a un script personalizado que toma un paquete de actualización extraído y gestiona el resto del proceso de actualización",
-    "UpdateMechanismHelpText": "Usa el actualizador integrado de {appName} o un script",
+    "UpdateMechanismHelpText": "Usar el actualizador integrado de {appName} o un script",
     "UpdateAutomaticallyHelpText": "Descarga e instala actualizaciones automáticamente. Podrás seguir instalándolas desde Sistema: Actualizaciones",
     "ICalIncludeUnmonitoredMoviesHelpText": "Incluir las películas no monitorizadas en el canal de iCal",
     "Ungroup": "Sin agrupar",
@@ -423,7 +423,6 @@
     "SourceRelativePath": "Ruta relativa de la fuente",
     "SourcePath": "Ruta de la fuente",
     "SorryThatMovieCannotBeFound": "Lo siento, no he encontrado esa película.",
-    "SkipFreeSpaceCheckWhenImportingHelpText": "Se usa cuando {appName} no puede detectar el espacio libre de tu carpeta raíz durante la importación de archivo",
     "SkipFreeSpaceCheck": "Saltar comprobación de espacio libre",
     "ShowUnknownMovieItems": "Mostrar Elementos Desconocidos",
     "ShowTitleHelpText": "Mostrar el título de la película debajo del poster",
@@ -792,7 +791,7 @@
     "Monday": "Lunes",
     "MovieIsRecommend": "Se recomienda la película según la adición reciente",
     "NextExecution": "Siguiente ejecución",
-    "NoAltTitle": "Sin títulos alternativos.",
+    "NoAlternativeTitles": "Sin títulos alternativos.",
     "NoEventsFound": "Ningún evento encontrado",
     "NoLinks": "Sin enlaces",
     "NoMoveFilesSelf": " No, moveré los archivos yo mismo",
@@ -816,7 +815,7 @@
     "ReplaceWithDash": "Reemplazar con guion",
     "TMDb": "TMDb",
     "Tomorrow": "Mañana",
-    "UnableToLoadAltTitle": "No se pueden cargar títulos alternativos.",
+    "AlternativeTitlesLoadError": "No se pueden cargar títulos alternativos.",
     "UpgradesAllowed": "Actualizaciones permitidas",
     "WhatsNew": "¿Qué hay de nuevo?",
     "ImportNotForDownloads": "No lo utilice para importar descargas desde su cliente de descargas, esto es sólo para bibliotecas organizadas existentes, no para archivos sin clasificar.",
@@ -1819,5 +1818,6 @@
     "CustomFormatsSpecificationExceptLanguage": "Excepto idioma",
     "CustomFormatsSpecificationExceptLanguageHelpText": "Coincide si cualquier idioma distinto del seleccionado está presente",
     "Logout": "Cerrar Sesión",
-    "NoBlocklistItems": "Ningún elemento en la lista de bloqueo"
+    "NoBlocklistItems": "Ningún elemento en la lista de bloqueo",
+    "LastSearched": "Último buscado"
 }
