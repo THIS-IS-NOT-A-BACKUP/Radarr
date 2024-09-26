@@ -13,33 +13,6 @@ import translate from 'Utilities/String/translate';
 import NamingModal from './NamingModal';
 import styles from './Naming.css';
 
-const colonReplacementOptions = [
-  {
-    key: 'delete',
-    get value() {
-      return translate('Delete');
-    }
-  },
-  {
-    key: 'dash',
-    get value() {
-      return translate('ReplaceWithDash');
-    }
-  },
-  {
-    key: 'spaceDash',
-    get value() {
-      return translate('ReplaceWithSpaceDash');
-    }
-  },
-  {
-    key: 'spaceDashSpace',
-    get value() {
-      return translate('ReplaceWithSpaceDashSpace');
-    }
-  }
-];
-
 class Naming extends Component {
 
   //
@@ -103,6 +76,14 @@ class Naming extends Component {
     const renameMovies = hasSettings && settings.renameMovies.value;
     const replaceIllegalCharacters = hasSettings && settings.replaceIllegalCharacters.value;
 
+    const colonReplacementOptions = [
+      { key: 'delete', value: translate('Delete') },
+      { key: 'dash', value: translate('ReplaceWithDash') },
+      { key: 'spaceDash', value: translate('ReplaceWithSpaceDash') },
+      { key: 'spaceDashSpace', value: translate('ReplaceWithSpaceDashSpace') },
+      { key: 'smart', value: translate('SmartReplace'), hint: translate('SmartReplaceHint') }
+    ];
+
     const standardMovieFormatHelpTexts = [];
     const standardMovieFormatErrors = [];
     const movieFolderFormatHelpTexts = [];
@@ -112,17 +93,13 @@ class Naming extends Component {
       if (examples.movieExample) {
         standardMovieFormatHelpTexts.push(`${translate('Movie')}: ${examples.movieExample}`);
       } else {
-        standardMovieFormatErrors.push({ get message() {
-          return translate('MovieInvalidFormat');
-        } });
+        standardMovieFormatErrors.push({ message: translate('MovieInvalidFormat') });
       }
 
       if (examples.movieFolderExample) {
         movieFolderFormatHelpTexts.push(`${translate('Example')}: ${examples.movieFolderExample}`);
       } else {
-        movieFolderFormatErrors.push({ get message() {
-          return translate('InvalidFormat');
-        } });
+        movieFolderFormatErrors.push({ message: translate('InvalidFormat') });
       }
     }
 
