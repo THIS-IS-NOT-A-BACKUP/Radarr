@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using NLog;
 using NzbDrone.Common.Cloud;
@@ -405,6 +406,22 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         {
             try
             {
+                var match = new Regex(@"\bimdb\.com/title/(tt\d{7,})\b", RegexOptions.IgnoreCase).Match(title);
+
+                if (match.Success)
+                {
+                    title = "imdb:" + match.Groups[1].Value;
+                }
+                else
+                {
+                    match = new Regex(@"\bthemoviedb\.org/movie/(\d+)\b", RegexOptions.IgnoreCase).Match(title);
+
+                    if (match.Success)
+                    {
+                        title = "tmdb:" + match.Groups[1].Value;
+                    }
+                }
+
                 var lowerTitle = title.ToLower();
 
                 lowerTitle = lowerTitle.Replace(".", "");
@@ -517,17 +534,17 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             catch (HttpException ex)
             {
                 _logger.Warn(ex);
-                throw new SkyHookException("Search for '{0}' failed. Unable to communicate with RadarrAPI.", ex, title);
+                throw new SkyHookException("Search for '{0}' failed. Unable to communicate with RadarrAPI. {1}", ex, title, ex.Message);
             }
             catch (WebException ex)
             {
                 _logger.Warn(ex);
-                throw new SkyHookException("Search for '{0}' failed. Unable to communicate with RadarrAPI.", ex, title, ex.Message);
+                throw new SkyHookException("Search for '{0}' failed. Unable to communicate with RadarrAPI. {1}", ex, title, ex.Message);
             }
             catch (Exception ex)
             {
                 _logger.Warn(ex);
-                throw new SkyHookException("Search for '{0}' failed. Invalid response received from RadarrAPI.", ex, title);
+                throw new SkyHookException("Search for '{0}' failed. Invalid response received from RadarrAPI. {1}", ex, title, ex.Message);
             }
         }
 
