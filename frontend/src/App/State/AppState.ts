@@ -8,6 +8,7 @@ import MovieCreditAppState from './MovieCreditAppState';
 import MovieFilesAppState from './MovieFilesAppState';
 import MoviesAppState, { MovieIndexAppState } from './MoviesAppState';
 import ParseAppState from './ParseAppState';
+import PathsAppState from './PathsAppState';
 import QueueAppState from './QueueAppState';
 import RootFolderAppState from './RootFolderAppState';
 import SettingsAppState from './SettingsAppState';
@@ -50,6 +51,7 @@ export interface AppSectionState {
   isConnected: boolean;
   isReconnecting: boolean;
   version: string;
+  prevVersion?: string;
   dimensions: {
     isSmallScreen: boolean;
     width: number;
@@ -70,6 +72,7 @@ interface AppState {
   movieIndex: MovieIndexAppState;
   movies: MoviesAppState;
   parse: ParseAppState;
+  paths: PathsAppState;
   queue: QueueAppState;
   rootFolders: RootFolderAppState;
   settings: SettingsAppState;
