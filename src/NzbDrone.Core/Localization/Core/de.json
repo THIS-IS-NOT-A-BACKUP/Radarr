@@ -1443,7 +1443,7 @@
     "DownloadClientDelugeSettingsDirectoryCompletedHelpText": "Optionaler Speicherort für Downloads. Lassen Sie das Feld leer, um den standardmäßigen rTorrent-Speicherort zu verwenden",
     "DownloadClientDelugeSettingsDirectoryHelpText": "Optionaler Speicherort für Downloads. Lassen Sie das Feld leer, um den standardmäßigen rTorrent-Speicherort zu verwenden",
     "ListQualityProfileHelpText": "Qualitätsprofil mit dem Listemelemente hinzugefügt werden sollen",
-    "DeletedReasonMissingFromDisk": "{appName} konnte die Datei auf der Festplatte nicht finden, daher wurde die Verknüpfung der Datei mit der Episode in der Datenbank aufgehoben",
+    "DeletedReasonMovieMissingFromDisk": "{appName} konnte die Datei auf der Festplatte nicht finden, daher wurde die Verknüpfung der Datei mit der Episode in der Datenbank aufgehoben",
     "ReleaseProfileTagMovieHelpText": "Veröffentlichungsprofile gelten für Künstler mit mindestens einem passenden Tag. Leer lassen, damit es für alle Künstler gilt",
     "SearchForAllMissingMoviesConfirmationCount": "Bist du dir sicher, dass du nach allen '{0}' fehlenden Alben suchen willst?",
     "SearchForCutoffUnmetMovies": "Suche nach allen abgeschnittenen unerfüllten Büchern",
@@ -1465,5 +1465,8 @@
     "ShowDigitalReleaseHelpText": "Kino-Erscheinungsdatum unter Poster anzeigen",
     "ShowPhysicalRelease": "Disc Veröffentlichungsdatum",
     "ShowPhysicalReleaseHelpText": "Kino-Erscheinungsdatum unter Poster anzeigen",
-    "FolderNameTokens": "Dateinamen Teile"
+    "FolderNameTokens": "Dateinamen Teile",
+    "DefaultNotFoundMessage": "Sie müssen verloren sein, hier gibt es nichts zu sehen.",
+    "ToggleMonitoredToUnmonitored": "Überwacht, klicken Sie, um die Überwachung aufzuheben",
+    "ToggleUnmonitoredToMonitored": "Nicht überwacht, klicke zum Überwachen"
 }
