@@ -362,7 +362,7 @@
     "Missing": "Mangler",
     "Month": "Måned",
     "MoreDetails": "Flere detaljer",
-    "MountCheckMessage": "Mount, der indeholder en filmsti, er monteret skrivebeskyttet: ",
+    "MountMovieHealthCheckMessage": "Mount, der indeholder en filmsti, er monteret skrivebeskyttet: ",
     "MovieFolderFormat": "Filmmappeformat",
     "MovieID": "Film-ID",
     "MovieIndex": "Filmindeks",
@@ -522,7 +522,6 @@
     "DoneEditingGroups": "Udført redigering af grupper",
     "DoNotPrefer": "Foretrækker ikke",
     "DownloadClientSettings": "Download klientindstillinger",
-    "DownloadClientUnavailable": "Downloadklienten er ikke tilgængelig",
     "DownloadedAndMonitored": "Downloadet (overvåget)",
     "DownloadedButNotMonitored": "Downloadet (ikke overvåget)",
     "Downloading": "Downloader",
@@ -1091,5 +1090,6 @@
     "ShowDigitalRelease": "Vis biografens udgivelsesdato",
     "ShowDigitalReleaseHelpText": "Vis udgivelsesdato under plakat",
     "ShowPhysicalRelease": "Fysisk udgivelsesdato",
-    "FolderNameTokens": "Filnavn tokens"
+    "FolderNameTokens": "Filnavn tokens",
+    "Clone": "Luk"
 }

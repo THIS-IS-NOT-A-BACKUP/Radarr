@@ -174,7 +174,6 @@
     "DownloadedButNotMonitored": "Baixado (não monitorado)",
     "DownloadedAndMonitored": "Baixado (monitorado)",
     "Downloaded": "Baixado",
-    "DownloadClientUnavailable": "O cliente de download está indisponível",
     "DownloadClientStatusCheckSingleClientMessage": "Clientes de download indisponíveis devido a falhas: {downloadClientNames}",
     "DownloadClientStatusCheckAllClientMessage": "Todos os clientes de download estão indisponíveis devido a falhas",
     "DownloadClientsSettingsSummary": "Clientes de download, gerenciamento de download e mapeamentos de caminhos remotos",
@@ -495,7 +494,7 @@
     "MoveFolders2": "Deseja mover os arquivos de filmes de \"{0}\" para \"{1}\"?",
     "MoveFolders1": "Deseja mover as pastas de filmes para \"{0}\"?",
     "MoveFiles": "Mover arquivos",
-    "MountCheckMessage": "A montagem que contém um caminho de filme é montada somente para leitura: ",
+    "MountMovieHealthCheckMessage": "A montagem que contém um caminho de filme é montada somente para leitura: ",
     "MoreInfo": "Mais informações",
     "MoreDetails": "Mais detalhes",
     "Months": "Meses",
@@ -773,7 +772,7 @@
     "Socks4": "Socks4",
     "ShownClickToHide": "Mostrado, clique para ocultar",
     "RecyclingBinCleanupHelpText": "Defina como 0 para desabilitar a limpeza automática",
-    "RecentFolders": "Pastas recentes",
+    "RecentFolders": "Pastas Recentes",
     "RecentChanges": "Mudanças Recentes",
     "Reason": "Razão",
     "Real": "Real",
@@ -1854,5 +1853,7 @@
     "MetadataXmbcSettingsMovieMetadataHelpText": ".nfo com metadados completos do filme",
     "MetadataXmbcSettingsMovieMetadataLanguageHelpText": "Incluir o idioma selecionado, se disponível em .nfo",
     "MetadataXmbcSettingsMovieMetadataNfoHelpText": "Grave metadados em movie.nfo em vez do nome de arquivo de filme padrão .nfo",
-    "MetadataXmbcSettingsMovieMetadataUrlHelpText": "Incluir URLs de filmes TMDb e IMDb no .nfo"
+    "MetadataXmbcSettingsMovieMetadataUrlHelpText": "Incluir URLs de filmes TMDb e IMDb no .nfo",
+    "FileBrowser": "Navegador de Arquivos",
+    "ManageFormats": "Gerenciar Formatos"
 }

@@ -634,10 +634,9 @@
     "DownloadedButNotMonitored": "Скачано (неотслеживается)",
     "DownloadedAndMonitored": "Скачано (Отслежено)",
     "Downloaded": "Скачано",
-    "DownloadClientUnavailable": "Программа для скачивания недоступна",
     "PhysicalRelease": "Релиз на носителе",
     "PhysicalReleaseDate": "Дата релиза на носителе",
-    "MountCheckMessage": "Смонтированный путь к фильму смонтировано режиме только для чтения: ",
+    "MountMovieHealthCheckMessage": "Смонтированный путь к фильму смонтировано режиме только для чтения: ",
     "MinimumLimits": "Минимальные ограничения",
     "MinimumCustomFormatScore": "Минимальная оценка пользовательского формата",
     "MinimumAgeHelpText": "Только для Usenet: минимальный возраст NZB в минутах до их захвата. Используйте это, чтобы дать новым релизам время распространиться среди вашего провайдера Usenet.",
@@ -1787,5 +1786,6 @@
     "OnFileUpgrade": "При обновлении файла",
     "AnnouncedMovieAvailabilityDescription": "Фильмы считаются доступными, как только они добавляются в {appName}.",
     "CountCustomFormatsSelected": "{count} пользовательских форматов выбрано",
-    "CustomFormatsSpecificationExceptLanguage": "Исключить язык"
+    "CustomFormatsSpecificationExceptLanguage": "Исключить язык",
+    "FileBrowser": "Файловый браузер"
 }

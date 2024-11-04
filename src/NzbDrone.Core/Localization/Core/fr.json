@@ -138,7 +138,7 @@
     "MovieIndex": "Index des films",
     "MovieEditor": "Éditeur de films",
     "Movie": "Film",
-    "MountCheckMessage": "Le montage contenant un chemin de film est monté en lecture seule : ",
+    "MountMovieHealthCheckMessage": "Le montage contenant un chemin de film est monté en lecture seule : ",
     "MoreInfo": "Plus d'informations",
     "Month": "Mois",
     "ImportListsSettingsSummary": "Importer depuis une autre instance {appName} ou des listes Trakt et gérer les exclusions de listes",
@@ -421,7 +421,6 @@
     "EnableAutomaticSearchHelpText": "Sera utilisé lorsque les recherches automatiques sont effectuées via l'interface utilisateur ou par {appName}",
     "DownloadWarning": "Avertissement de téléchargement : {warningMessage}",
     "Downloading": "Téléchargement",
-    "DownloadClientUnavailable": "Le client de téléchargement n'est pas disponible",
     "DeleteRestrictionHelpText": "Voulez-vous vraiment supprimer cette restriction ?",
     "DeleteIndexerMessageText": "Voulez-vous vraiment supprimer l'indexeur « {name} » ?",
     "CopyToClipboard": "Copier dans le presse-papier",
@@ -1843,5 +1842,6 @@
     "MetadataSettingsMovieMetadataCollectionName": "Nom de la collection de films",
     "MetadataSettingsMovieMetadataUrl": "Lien des métadonnées du film",
     "InCinemasMovieAvailabilityDescription": "Les films sont considérés comme disponibles dès leur sortie en salles.",
-    "Disposition": "Disposition"
+    "Disposition": "Disposition",
+    "FileBrowser": "Explorateur de fichiers"
 }

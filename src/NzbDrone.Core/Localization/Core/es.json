@@ -168,7 +168,7 @@
     "PhysicalRelease": "Estreno Físico",
     "OutputPath": "Ruta de salida",
     "MovieTitle": "Título de la Película",
-    "MountCheckMessage": "El punto de montaje que contiene la ruta de una película es de solo lectura: ",
+    "MountMovieHealthCheckMessage": "El punto de montaje que contiene la ruta de una película es de solo lectura: ",
     "MonitoredOnly": "Solo monitorizados",
     "MetadataSettingsMovieSummary": "Crea archivos de metadatos cuando las películas se importen o actualicen",
     "MediaManagementSettingsSummary": "Ajustes de nombrado y gestión de archivos",
@@ -620,7 +620,6 @@
     "DownloadWarning": "Alerta de descarga: {warningMessage}",
     "Downloading": "Descargando",
     "DownloadFailed": "La descarga ha fallado",
-    "DownloadClientUnavailable": "El cliente de descargas no está disponible",
     "DeleteTagMessageText": "¿Estás seguro que quieres eliminar la etiqueta '{label}'?",
     "DeleteRestrictionHelpText": "¿Estás seguro que quieres eliminar esta restricción?",
     "DeleteNotificationMessageText": "¿Estás seguro que quieres eliminar la notificación '{name}'?",
@@ -1854,5 +1853,6 @@
     "MetadataSettingsMovieMetadataUrl": "URL de los metadatos de la película",
     "MetadataSettingsMovieMetadataNfo": "Usar película.nfo",
     "MetadataXmbcSettingsMovieMetadataUrlHelpText": "Incluye las URLs de TMDb e IMDb de la película en el .nfo",
-    "MetadataXmbcSettingsMovieMetadataNfoHelpText": "Escribe los metadatos en película.nfo en lugar de al archivo <nombreArchivo-película>.nfo predeterminado"
+    "MetadataXmbcSettingsMovieMetadataNfoHelpText": "Escribe los metadatos en película.nfo en lugar de al archivo <nombreArchivo-película>.nfo predeterminado",
+    "FileBrowser": "Explorador de archivos"
 }

@@ -279,7 +279,7 @@
     "Missing": "Puuttuu",
     "Month": "Kuukausi",
     "MoreDetails": "Lisätietoja",
-    "MountCheckMessage": "Kohteen sijainnin sisältävä media on kytketty vain luku -tilassa: ",
+    "MountMovieHealthCheckMessage": "Kohteen sijainnin sisältävä media on kytketty vain luku -tilassa: ",
     "MovieID": "Elokuvan tunnus",
     "MovieIndex": "Elokuvakirjasto",
     "MovieInfoLanguageHelpText": "{appName}in käyttöliittymässä näkyvien elokuvatietojen kieli.",
@@ -502,7 +502,6 @@
     "EditCustomFormat": "Muokkaa mukautettua muotoa",
     "DownloadClientsSettingsSummary": "Lataustyökalut, latausten käsittely ja etäsijaintien kohdistukset.",
     "DownloadClientStatusCheckSingleClientMessage": "Lataustyökaluja ei ole ongelmien vuoksi käytettävissä: {downloadClientNames}",
-    "DownloadClientUnavailable": "Lataustyökalu ei ole käytettävissä",
     "Downloaded": "Ladattu",
     "DownloadedAndMonitored": "Ladattu (valvottu)",
     "DownloadedButNotMonitored": "Ladattu (valvomaton)",
@@ -1761,5 +1760,6 @@
     "FolderNameTokens": "Tiedostonimen muuttujat",
     "DefaultNotFoundMessage": "Lienet eksyksissä, koska täällä ei ole mitään nähtävää.",
     "ToggleMonitoredToUnmonitored": "Valvotaan (lopeta painamalla)",
-    "ToggleUnmonitoredToMonitored": "Ei valvota (aloita painamalla)"
+    "ToggleUnmonitoredToMonitored": "Ei valvota (aloita painamalla)",
+    "FileBrowser": "Tiedostoselain"
 }

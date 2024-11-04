@@ -208,7 +208,7 @@
     "MarkAsFailed": "Başarısız olarak işaretle",
     "MaximumSizeHelpText": "MB cinsinden alınacak bir sürüm için maksimum boyut. Sınırsız olarak ayarlamak için sıfıra ayarlayın",
     "MediaManagementSettings": "Medya Yönetimi Ayarları",
-    "MountCheckMessage": "Bir film yolu içeren bağlama, salt okunur olarak bağlanır: ",
+    "MountMovieHealthCheckMessage": "Bir film yolu içeren bağlama, salt okunur olarak bağlanır: ",
     "RadarrTags": "{appName} Etiketleri",
     "VideoCodec": "Video Codec",
     "NoLimitForAnyRuntime": "Herhangi bir çalışma zamanı için sınır yok",
@@ -694,7 +694,6 @@
     "DownloadClientSettings": "İstemci Ayarlarını İndir",
     "DownloadClientsSettingsSummary": "İndirme İstemcileri, indirme işlemleri ve uzaktan yol eşlemeleri",
     "DownloadClientStatusCheckSingleClientMessage": "Hatalar nedeniyle indirilemeyen istemciler: {downloadClientNames}",
-    "DownloadClientUnavailable": "İndirme istemcisi kullanılamıyor",
     "DownloadedAndMonitored": "İndirildi (Takip Ediliyor)",
     "DownloadedButNotMonitored": "İndirildi (Takip Edilmiyor)",
     "DownloadFailed": "Yükleme başarısız",
@@ -1854,5 +1853,6 @@
     "MetadataXmbcSettingsMovieMetadataLanguageHelpText": ".nfo'da mevcutsa seçili dili ekleyin",
     "MetadataXmbcSettingsMovieMetadataNfoHelpText": "Meta verileri varsayılan <film-dosyaadı>.nfo yerine movie.nfo'ya yaz",
     "MetadataXmbcSettingsMovieMetadataUrlHelpText": "TMDb ve IMDb film URL'lerini .nfo'ya ekleyin",
-    "ToggleUnmonitoredToMonitored": "İzlenmiyor, izlemek için tıklayın"
+    "ToggleUnmonitoredToMonitored": "İzlenmiyor, izlemek için tıklayın",
+    "FileBrowser": "Dosya Yöneticisi"
 }

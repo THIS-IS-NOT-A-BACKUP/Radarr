@@ -39,7 +39,6 @@
     "DeleteSelectedMovieFiles": "選択したムービーファイルを削除する",
     "DownloadClientCheckUnableToCommunicateMessage": "{downloadClientName}と通信できません。",
     "DownloadClientsSettingsSummary": "クライアントのダウンロード、ダウンロード処理、リモートパスマッピング",
-    "DownloadClientUnavailable": "ダウンロードクライアントは利用できません",
     "DownloadedAndMonitored": "ダウンロード（監視）",
     "DownloadPropersAndRepacks": "適切なものと再梱包",
     "EditCustomFormat": "カスタムフォーマットの編集",
@@ -316,7 +315,7 @@
     "Missing": "行方不明",
     "Month": "月",
     "MoreDetails": "詳細",
-    "MountCheckMessage": "ムービーパスを含むマウントは読み取り専用でマウントされます。 ",
+    "MountMovieHealthCheckMessage": "ムービーパスを含むマウントは読み取り専用でマウントされます。 ",
     "MovieFolderFormat": "ムービーフォルダ形式",
     "MovieID": "映画ID",
     "MovieIndex": "映画インデックス",
@@ -1069,5 +1068,6 @@
     "ShowPhysicalRelease": "物理的なリリース日",
     "ShowPhysicalReleaseHelpText": "ポスターの下にリリース日を表示する",
     "ShowDigitalReleaseHelpText": "ポスターの下にリリース日を表示する",
-    "FolderNameTokens": "ファイル名トークン"
+    "FolderNameTokens": "ファイル名トークン",
+    "Clone": "閉じる"
 }
