@@ -247,7 +247,7 @@
     "AllMoviesHiddenDueToFilter": "Todas las películas están ocultas debido al filtro aplicado.",
     "Age": "Antigüedad",
     "AddNewMovie": "Añadir película nueva",
-    "SystemTimeCheckMessage": "El reloj del sistema está retrasado más de un día. Las tareas de mantenimiento no se ejecutarán correctamente hasta que se haya corregido",
+    "SystemTimeHealthCheckMessage": "El reloj del sistema está retrasado más de un día. Las tareas de mantenimiento no se ejecutarán correctamente hasta que se haya corregido",
     "MonitorMovie": "Monitorizar Película",
     "ExistingMovies": "Película(s) Existente(s)",
     "EditRemotePathMapping": "Editar mapeo de ruta remota",
@@ -947,7 +947,7 @@
     "Reddit": "Reddit",
     "More": "Más",
     "Download": "Descargar",
-    "DownloadClientCheckDownloadingToRoot": "El cliente de descarga {downloadClientName} coloca las descargas en la carpeta raíz {path}. No deberías descargar a una carpeta raíz.",
+    "DownloadClientRootFolderHealthCheckMessage": "El cliente de descarga {downloadClientName} coloca las descargas en la carpeta raíz {rootFolderPath}. No deberías descargar a una carpeta raíz.",
     "ImportListMultipleMissingRoots": "Faltan varias carpetas raíz de las listas de importación: {rootFoldersInfo}",
     "ImportListMissingRoot": "Falta la capeta raíz de la(s) lista(s) de importación: {rootFolderInfo}",
     "From": "de",
@@ -1862,5 +1862,6 @@
     "FavoriteFolders": "Carpetas favoritas",
     "Warning": "Aviso",
     "FavoriteFolderRemove": "Eliminar carpeta favorita",
-    "DownloadClientUnavailable": "Cliente de descarga no disponible"
+    "DownloadClientUnavailable": "Cliente de descarga no disponible",
+    "NotificationsSettingsWebhookHeaders": "Cabeceras"
 }

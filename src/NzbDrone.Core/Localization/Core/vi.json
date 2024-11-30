@@ -608,7 +608,7 @@
     "FileBrowserPlaceholderText": "Bắt đầu nhập hoặc chọn một đường dẫn bên dưới",
     "StartupDirectory": "Thư mục khởi động",
     "System": "Hệ thống",
-    "SystemTimeCheckMessage": "Thời gian hệ thống tắt hơn 1 ngày. Các tác vụ đã lên lịch có thể không chạy chính xác cho đến khi thời gian được sửa",
+    "SystemTimeHealthCheckMessage": "Thời gian hệ thống tắt hơn 1 ngày. Các tác vụ đã lên lịch có thể không chạy chính xác cho đến khi thời gian được sửa",
     "Posters": "Áp phích",
     "PosterSize": "Kích thước áp phích",
     "TotalFileSize": "Tổng kích thước tệp",
@@ -954,7 +954,7 @@
     "Reddit": "Reddit",
     "More": "Hơn",
     "Download": "Tải xuống",
-    "DownloadClientCheckDownloadingToRoot": "Tải xuống ứng dụng khách {downloadClientName} đặt các bản tải xuống trong thư mục gốc {path}. Bạn không nên tải xuống thư mục gốc.",
+    "DownloadClientRootFolderHealthCheckMessage": "Tải xuống ứng dụng khách {downloadClientName} đặt các bản tải xuống trong thư mục gốc {rootFolderPath}. Bạn không nên tải xuống thư mục gốc.",
     "Blocklist": "Danh sách chặn",
     "BlocklistRelease": "Chặn bản phát hành",
     "RemoveFromBlocklist": "Xóa khỏi danh sách đen",
@@ -1111,5 +1111,6 @@
     "AllTitles": "Tất cả các tệp",
     "DownloadClientUnavailable": "Ứng dụng khách tải xuống không khả dụng",
     "AddReleaseProfile": "Chỉnh sửa hồ sơ độ trễ",
-    "EditConditionImplementation": "Thêm điều kiện - {implementationName}"
+    "EditConditionImplementation": "Thêm điều kiện - {implementationName}",
+    "EditIndexerImplementation": "Thêm điều kiện - {implementationName}"
 }
