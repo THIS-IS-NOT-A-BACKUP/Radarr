@@ -28,6 +28,7 @@ import EditMovieModalConnector from 'Movie/Edit/EditMovieModalConnector';
 import getMovieStatusDetails from 'Movie/getMovieStatusDetails';
 import MovieHistoryModal from 'Movie/History/MovieHistoryModal';
 import MovieCollectionLabelConnector from 'Movie/MovieCollectionLabelConnector';
+import MovieGenres from 'Movie/MovieGenres';
 import MoviePoster from 'Movie/MoviePoster';
 import MovieInteractiveSearchModal from 'Movie/Search/MovieInteractiveSearchModal';
 import MovieFileEditorTable from 'MovieFile/Editor/MovieFileEditorTable';
@@ -651,9 +652,7 @@ class MovieDetails extends Component {
                         name={translate('Genres')}
                         size={sizes.LARGE}
                       >
-                        <span className={styles.genres}>
-                          {genres.join(', ')}
-                        </span>
+                        <MovieGenres className={styles.genres} genres={genres} />
                       </InfoLabel> :
                       null
                   }
