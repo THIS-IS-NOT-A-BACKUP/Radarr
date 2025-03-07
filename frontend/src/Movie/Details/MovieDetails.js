@@ -24,10 +24,10 @@ import TraktRating from 'Components/TraktRating';
 import { icons, kinds, sizes, sortDirections, tooltipPositions } from 'Helpers/Props';
 import InteractiveImportModal from 'InteractiveImport/InteractiveImportModal';
 import DeleteMovieModal from 'Movie/Delete/DeleteMovieModal';
-import EditMovieModalConnector from 'Movie/Edit/EditMovieModalConnector';
+import EditMovieModal from 'Movie/Edit/EditMovieModal';
 import getMovieStatusDetails from 'Movie/getMovieStatusDetails';
 import MovieHistoryModal from 'Movie/History/MovieHistoryModal';
-import MovieCollectionLabelConnector from 'Movie/MovieCollectionLabelConnector';
+import MovieCollectionLabel from 'Movie/MovieCollectionLabel';
 import MovieGenres from 'Movie/MovieGenres';
 import MoviePoster from 'Movie/MoviePoster';
 import MovieInteractiveSearchModal from 'Movie/Search/MovieInteractiveSearchModal';
@@ -609,7 +609,7 @@ class MovieDetails extends Component {
                         size={sizes.LARGE}
                       >
                         <div className={styles.collection}>
-                          <MovieCollectionLabelConnector
+                          <MovieCollectionLabel
                             tmdbId={collection.tmdbId}
                           />
                         </div>
@@ -730,7 +730,7 @@ class MovieDetails extends Component {
             onModalClose={this.onOrganizeModalClose}
           />
 
-          <EditMovieModalConnector
+          <EditMovieModal
             isOpen={isEditMovieModalOpen}
             movieId={id}
             onModalClose={this.onEditMovieModalClose}
