@@ -330,7 +330,7 @@
     "LogLevel": "Уровень журналирования",
     "LogLevelTraceHelpTextWarning": "Включение трассировки журнала должно быть временным",
     "Manual": "Ручной",
-    "MarkAsFailedMessageText": "Вы уверены, что хотите отметить '{0}' как неудачный?",
+    "MarkAsFailedConfirmation": "Вы уверены, что хотите отметить '{0}' как неудачный?",
     "CustomFilters": "Настраиваемые фильтры",
     "CustomFormats": "Пользовательский формат",
     "ConnectSettingsSummary": "Уведомления, подключения к серверам/проигрывателям и настраиваемые скрипты",
@@ -1928,5 +1928,6 @@
     "MovieFileRenamed": "Файл фильма переименован",
     "MovieFileRenamedTooltip": "Файл фильма переименован",
     "MovieFolderImportedTooltip": "Фильм импортирован из папки фильма",
-    "Recommended": "Рекомендуемое"
+    "Recommended": "Рекомендуемое",
+    "EditMovieModalHeader": "Изменить – {title}"
 }

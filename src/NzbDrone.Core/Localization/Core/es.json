@@ -602,7 +602,7 @@
     "MovieIsMonitored": "La película está monitorizada",
     "MovieExcludedFromAutomaticAdd": "Película Excluida de Adición Automática",
     "MovieAlreadyExcluded": "Película ya Excluida",
-    "MarkAsFailedMessageText": "¿Estás seguro que quieres marcar '{0}' como fallida?",
+    "MarkAsFailedConfirmation": "¿Estás seguro que quieres marcar '{0}' como fallida?",
     "Manual": "Manual",
     "LogLevelTraceHelpTextWarning": "El registro de seguimiento sólo debe activarse temporalmente",
     "LastDuration": "Última Duración",
@@ -1932,5 +1932,6 @@
     "FailedAt": "Error el {date}",
     "GrabbedAt": "Capturado el {date}",
     "ReleaseSource": "Origen del lanzamiento",
-    "DownloadClientUTorrentProviderMessage": "Debido a que uTorrent es conocido por el cryptoware, el malware y la publicidad, sugerimos cambiar a un cliente mejor como qBittorrent, Deluge o ruTorrent."
+    "DownloadClientUTorrentProviderMessage": "Debido a que uTorrent es conocido por el cryptoware, el malware y la publicidad, sugerimos cambiar a un cliente mejor como qBittorrent, Deluge o ruTorrent.",
+    "EditMovieModalHeader": "Editar - {title}"
 }

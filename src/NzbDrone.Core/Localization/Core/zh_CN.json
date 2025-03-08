@@ -568,7 +568,7 @@
     "MaximumSizeHelpText": "抓取发布资源的最大大小（MB）。设置为零则不限制",
     "Max": "最大的",
     "MassMovieSearch": "批量搜索电影",
-    "MarkAsFailedMessageText": "您确定要标记'{0}'为已失败？",
+    "MarkAsFailedConfirmation": "您确定要标记'{0}'为已失败？",
     "ManualImportSelectQuality": " 手动导入 - 选择质量",
     "ManualImportSelectMovie": "手动导入 - 选择电影",
     "ManualImportSelectLanguage": "手动导入 - 选择语言",
@@ -1930,5 +1930,6 @@
     "ImportListsTraktSettingsYearsMovieHelpText": "按年份或年份范围筛选电影",
     "AutoTaggingSpecificationMaximumRuntime": "最大运行时间",
     "AutoTaggingSpecificationMinimumRuntime": "最小运行时间",
-    "DownloadClientUTorrentProviderMessage": "由于uTorrent以加密软件、恶意软件和广告而闻名，我们建议切换到更好的客户端，例如qBittorrent、Deluge或ruTorrent。"
+    "DownloadClientUTorrentProviderMessage": "由于uTorrent以加密软件、恶意软件和广告而闻名，我们建议切换到更好的客户端，例如qBittorrent、Deluge或ruTorrent。",
+    "EditMovieModalHeader": "编辑 - {title}"
 }

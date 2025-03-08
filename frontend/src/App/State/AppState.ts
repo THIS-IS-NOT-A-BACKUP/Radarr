@@ -1,14 +1,14 @@
 import BlocklistAppState from './BlocklistAppState';
 import CalendarAppState from './CalendarAppState';
 import CommandAppState from './CommandAppState';
-import HistoryAppState from './HistoryAppState';
+import HistoryAppState, { MovieHistoryAppState } from './HistoryAppState';
 import InteractiveImportAppState from './InteractiveImportAppState';
 import MovieBlocklistAppState from './MovieBlocklistAppState';
 import MovieCollectionAppState from './MovieCollectionAppState';
 import MovieCreditAppState from './MovieCreditAppState';
 import MovieFilesAppState from './MovieFilesAppState';
-import MovieHistoryAppState from './MovieHistoryAppState';
 import MoviesAppState, { MovieIndexAppState } from './MoviesAppState';
+import OrganizePreviewAppState from './OrganizePreviewAppState';
 import ParseAppState from './ParseAppState';
 import PathsAppState from './PathsAppState';
 import QueueAppState from './QueueAppState';
@@ -76,6 +76,7 @@ interface AppState {
   movieHistory: MovieHistoryAppState;
   movieIndex: MovieIndexAppState;
   movies: MoviesAppState;
+  organizePreview: OrganizePreviewAppState;
   parse: ParseAppState;
   paths: PathsAppState;
   queue: QueueAppState;
