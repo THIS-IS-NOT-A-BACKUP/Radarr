@@ -52,7 +52,7 @@ import MovieInteractiveSearchModal from 'Movie/Search/MovieInteractiveSearchModa
 import MovieFileEditorTable from 'MovieFile/Editor/MovieFileEditorTable';
 import ExtraFileTable from 'MovieFile/Extras/ExtraFileTable';
 import OrganizePreviewModal from 'Organize/OrganizePreviewModal';
-import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
+import QualityProfileName from 'Settings/Profiles/Quality/QualityProfileName';
 import { executeCommand } from 'Store/Actions/commandActions';
 import {
   clearExtraFiles,
@@ -71,6 +71,10 @@ import {
   clearQueueDetails,
   fetchQueueDetails,
 } from 'Store/Actions/queueActions';
+import {
+  cancelFetchReleases,
+  clearReleases,
+} from 'Store/Actions/releaseActions';
 import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
 import { fetchImportListSchema } from 'Store/Actions/Settings/importLists';
 import createAllMoviesSelector from 'Store/Selectors/createAllMoviesSelector';
@@ -427,6 +431,17 @@ function MovieDetails({ movieId }: MovieDetailsProps) {
 
   const handleKeyUp = useCallback(
     (event: KeyboardEvent) => {
+      if (
+        isOrganizeModalOpen ||
+        isManageMoviesModalOpen ||
+        isInteractiveSearchModalOpen ||
+        isEditMovieModalOpen ||
+        isDeleteMovieModalOpen ||
+        isMovieHistoryModalOpen
+      ) {
+        return;
+      }
+
       if (event.composedPath && event.composedPath().length === 4) {
         if (event.key === 'ArrowLeft' && previousMovie !== undefined) {
           history.push(getPathWithUrlBase(`/movie/${previousMovie.titleSlug}`));
@@ -437,7 +452,17 @@ function MovieDetails({ movieId }: MovieDetailsProps) {
         }
       }
     },
-    [previousMovie, nextMovie, history]
+    [
+      isOrganizeModalOpen,
+      isManageMoviesModalOpen,
+      isInteractiveSearchModalOpen,
+      isEditMovieModalOpen,
+      isDeleteMovieModalOpen,
+      isMovieHistoryModalOpen,
+      previousMovie,
+      nextMovie,
+      history,
+    ]
   );
 
   const populate = useCallback(() => {
@@ -462,6 +487,8 @@ function MovieDetails({ movieId }: MovieDetailsProps) {
       dispatch(clearExtraFiles());
       dispatch(clearMovieCredits());
       dispatch(clearQueueDetails());
+      dispatch(cancelFetchReleases());
+      dispatch(clearReleases());
     };
   }, [populate, dispatch]);
 
@@ -791,9 +818,7 @@ function MovieDetails({ movieId }: MovieDetailsProps) {
                   size={sizes.LARGE}
                 >
                   <span className={styles.qualityProfileName}>
-                    <QualityProfileNameConnector
-                      qualityProfileId={qualityProfileId}
-                    />
+                    <QualityProfileName qualityProfileId={qualityProfileId} />
                   </span>
                 </InfoLabel>
 
