@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -104,6 +105,7 @@ namespace Radarr.Api.V3.MovieFiles
             return Accepted(movieFile.Id);
         }
 
+        [Obsolete("Use bulk endpoint instead")]
         [HttpPut("editor")]
         [Consumes("application/json")]
         public object SetMovieFile([FromBody] MovieFileListResource resource)
@@ -179,6 +181,55 @@ namespace Radarr.Api.V3.MovieFiles
             }
 
             return new { };
+        }
+
+        [HttpPut("bulk")]
+        [Consumes("application/json")]
+        public object SetPropertiesBulk([FromBody] List<MovieFileResource> resources)
+        {
+            var movieFiles = _mediaFileService.GetMovies(resources.Select(r => r.Id));
+
+            foreach (var movieFile in movieFiles)
+            {
+                var resourceMovieFile = resources.Single(r => r.Id == movieFile.Id);
+
+                if (resourceMovieFile.Languages != null)
+                {
+                    // Don't allow user to set files with 'Any' or 'Original' language
+                    movieFile.Languages = resourceMovieFile.Languages.Where(l => l != null && l != Language.Any && l != Language.Original).ToList();
+                }
+
+                if (resourceMovieFile.Quality != null)
+                {
+                    movieFile.Quality = resourceMovieFile.Quality;
+                }
+
+                if (resourceMovieFile.SceneName != null && SceneChecker.IsSceneTitle(resourceMovieFile.SceneName))
+                {
+                    movieFile.SceneName = resourceMovieFile.SceneName;
+                }
+
+                if (resourceMovieFile.Edition != null)
+                {
+                    movieFile.Edition = resourceMovieFile.Edition;
+                }
+
+                if (resourceMovieFile.ReleaseGroup != null)
+                {
+                    movieFile.ReleaseGroup = resourceMovieFile.ReleaseGroup;
+                }
+
+                if (resourceMovieFile.IndexerFlags.HasValue)
+                {
+                    movieFile.IndexerFlags = (IndexerFlags)resourceMovieFile.IndexerFlags;
+                }
+            }
+
+            _mediaFileService.Update(movieFiles);
+
+            var movie = _movieService.GetMovie(movieFiles.First().MovieId);
+
+            return Accepted(movieFiles.ConvertAll(f => f.ToResource(movie, _upgradableSpecification, _formatCalculator)));
         }
 
         [NonAction]
