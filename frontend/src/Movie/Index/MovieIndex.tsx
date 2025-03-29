@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { SelectProvider } from 'App/SelectContext';
 import ClientSideCollectionAppState from 'App/State/ClientSideCollectionAppState';
 import MoviesAppState, { MovieIndexAppState } from 'App/State/MoviesAppState';
@@ -26,6 +27,7 @@ import { DESCENDING } from 'Helpers/Props/sortDirections';
 import InteractiveImportModal from 'InteractiveImport/InteractiveImportModal';
 import NoMovie from 'Movie/NoMovie';
 import { executeCommand } from 'Store/Actions/commandActions';
+import { fetchMovies } from 'Store/Actions/movieActions';
 import {
   setMovieFilter,
   setMovieSort,
@@ -75,6 +77,8 @@ interface MovieIndexProps {
 }
 
 const MovieIndex = withScrollPosition((props: MovieIndexProps) => {
+  const history = useHistory();
+
   const {
     isFetching,
     isPopulated,
@@ -104,6 +108,12 @@ const MovieIndex = withScrollPosition((props: MovieIndexProps) => {
     undefined
   );
   const [isSelectMode, setIsSelectMode] = useState(false);
+
+  useEffect(() => {
+    if (history.action === 'PUSH') {
+      dispatch(fetchMovies());
+    }
+  }, [history, dispatch]);
 
   useEffect(() => {
     dispatch(fetchQueueDetails({ all: true }));
