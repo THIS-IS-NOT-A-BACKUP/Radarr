@@ -6,12 +6,12 @@ import Icon from 'Components/Icon';
 import ImdbRating from 'Components/ImdbRating';
 import IconButton from 'Components/Link/IconButton';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
+import MovieTagList from 'Components/MovieTagList';
 import RottenTomatoRating from 'Components/RottenTomatoRating';
 import RelativeDateCell from 'Components/Table/Cells/RelativeDateCell';
 import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
 import VirtualTableSelectCell from 'Components/Table/Cells/VirtualTableSelectCell';
 import Column from 'Components/Table/Column';
-import TagListConnector from 'Components/TagListConnector';
 import TmdbRating from 'Components/TmdbRating';
 import Tooltip from 'Components/Tooltip/Tooltip';
 import TraktRating from 'Components/TraktRating';
@@ -315,12 +315,8 @@ function MovieIndexRow(props: MovieIndexRowProps) {
 
         if (name === 'path') {
           return (
-            <VirtualTableRowCell
-              key={name}
-              className={styles[name]}
-              title={path}
-            >
-              {path}
+            <VirtualTableRowCell key={name} className={styles[name]}>
+              <span title={path}>{path}</span>
             </VirtualTableRowCell>
           );
         }
@@ -429,7 +425,7 @@ function MovieIndexRow(props: MovieIndexRowProps) {
         if (name === 'tags') {
           return (
             <VirtualTableRowCell key={name} className={styles[name]}>
-              <TagListConnector tags={tags} />
+              <MovieTagList tags={tags} />
             </VirtualTableRowCell>
           );
         }
