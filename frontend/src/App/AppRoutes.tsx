@@ -15,9 +15,9 @@ import MovieIndex from 'Movie/Index/MovieIndex';
 import CustomFormatSettingsPage from 'Settings/CustomFormats/CustomFormatSettingsPage';
 import DownloadClientSettingsConnector from 'Settings/DownloadClients/DownloadClientSettingsConnector';
 import GeneralSettingsConnector from 'Settings/General/GeneralSettingsConnector';
-import ImportListSettingsConnector from 'Settings/ImportLists/ImportListSettingsConnector';
-import IndexerSettingsConnector from 'Settings/Indexers/IndexerSettingsConnector';
-import MediaManagementConnector from 'Settings/MediaManagement/MediaManagementConnector';
+import ImportListSettings from 'Settings/ImportLists/ImportListSettings';
+import IndexerSettings from 'Settings/Indexers/IndexerSettings';
+import MediaManagement from 'Settings/MediaManagement/MediaManagement';
 import MetadataSettings from 'Settings/Metadata/MetadataSettings';
 import NotificationSettings from 'Settings/Notifications/NotificationSettings';
 import Profiles from 'Settings/Profiles/Profiles';
@@ -99,10 +99,7 @@ function AppRoutes() {
 
       <Route exact={true} path="/settings" component={Settings} />
 
-      <Route
-        path="/settings/mediamanagement"
-        component={MediaManagementConnector}
-      />
+      <Route path="/settings/mediamanagement" component={MediaManagement} />
 
       <Route path="/settings/profiles" component={Profiles} />
 
@@ -113,17 +110,14 @@ function AppRoutes() {
         component={CustomFormatSettingsPage}
       />
 
-      <Route path="/settings/indexers" component={IndexerSettingsConnector} />
+      <Route path="/settings/indexers" component={IndexerSettings} />
 
       <Route
         path="/settings/downloadclients"
         component={DownloadClientSettingsConnector}
       />
 
-      <Route
-        path="/settings/importlists"
-        component={ImportListSettingsConnector}
-      />
+      <Route path="/settings/importlists" component={ImportListSettings} />
 
       <Route path="/settings/connect" component={NotificationSettings} />
 

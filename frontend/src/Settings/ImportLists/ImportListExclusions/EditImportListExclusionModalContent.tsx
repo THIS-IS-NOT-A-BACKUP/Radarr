@@ -46,7 +46,6 @@ function createImportListExclusionSelector(id?: number) {
       const settings = selectSettings(mapping, pendingChanges, saveError);
 
       return {
-        id,
         isFetching,
         error,
         isSaving,
@@ -171,7 +170,7 @@ function EditImportListExclusionModalContent({
       </ModalBody>
 
       <ModalFooter>
-        {id && (
+        {id ? (
           <Button
             className={styles.deleteButton}
             kind={kinds.DANGER}
@@ -179,7 +178,7 @@ function EditImportListExclusionModalContent({
           >
             {translate('Delete')}
           </Button>
-        )}
+        ) : null}
 
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
