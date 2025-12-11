@@ -116,7 +116,12 @@ const movieTokens = [
   },
   {
     token: '{Movie CollectionThe}',
-    example: 'Movie Collection, The',
+    example: "Movie's Collection, The",
+    footNotes: '1',
+  },
+  {
+    token: '{Movie CleanCollectionThe}',
+    example: 'Movies Collection, The',
     footNotes: '1',
   },
   { token: '{Movie Certification}', example: 'R' },
