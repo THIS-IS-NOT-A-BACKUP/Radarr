@@ -1,8 +1,13 @@
 interface MediaInfo {
+  /** @deprecated */
   audioBitrate: number;
+  /** @deprecated */
   audioChannels: number;
+  /** @deprecated */
   audioCodec: string;
+  /** @deprecated */
   audioLanguages: string;
+  /** @deprecated */
   audioStreamCount: number;
   videoBitDepth: number;
   videoBitrate: number;
@@ -13,7 +18,29 @@ interface MediaInfo {
   resolution: string;
   runTime: string;
   scanType: string;
+  /** @deprecated */
   subtitles: string;
+  audioStreams: MediaAudioStream[];
+  subtitleStreams: MediaSubtitleStream[];
+}
+
+interface MediaStream {
+  language: string;
+}
+
+interface MediaAudioStream extends MediaStream {
+  codec: string;
+  bitrate: number;
+  channels: number;
+  channelPositions: string;
+  title: string;
+}
+
+interface MediaSubtitleStream extends MediaStream {
+  format: string;
+  title: string;
+  forced?: boolean;
+  hearingImpaired?: boolean;
 }
 
 export default MediaInfo;
